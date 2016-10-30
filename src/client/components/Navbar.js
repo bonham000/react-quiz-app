@@ -17,23 +17,14 @@ class Navbar extends Component {
 
             <Link to = '/' className = 'navLink' activeClassName = 'activeRoute'>Home</Link>
 
-            { !isAuthenticated &&
-                <button>
-                  <Link to = 'login' className = 'authLink'>Login</Link>
-                </button> }
+            { isAuthenticated &&
+              <Link to = '#' className = 'navLink' onClick = { () => dispatch(logoutUser()) }>Logout</Link> }
 
             { !isAuthenticated &&
-              <button>
-                <Link to = 'signup' className = 'authLink'>Sign Up</Link>
-              </button> }
+              <Link to = 'login' className = 'navLink' activeClassName = 'activeRoute'>Login</Link> }
 
-            { isAuthenticated &&
-                <Link to = 'counter' className = 'navLink' activeClassName = 'activeRoute'>Counter</Link> }
-
-            { isAuthenticated &&
-              <button onClick={ () => dispatch(logoutUser()) }>
-                Logout
-              </button> }
+            { !isAuthenticated &&
+              <Link to = 'signup' className = 'navLink' activeClassName = 'activeRoute'>Sign Up</Link> }
 
           </div>
         </div>
