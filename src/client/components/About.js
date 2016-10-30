@@ -10,13 +10,6 @@ import { browserHistory, Link } from 'react-router'
 class About extends React.Component {
 	 constructor(props) {
     super(props);
-    this.navigateCounter = this.navigateCounter.bind(this);
-  }
-  navigateCounter() {
-
-    if (this.props.isAuthenticated) {
-      browserHistory.push('/counter');
-    }
   }
  	render() {
  		return (
