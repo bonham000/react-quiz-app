@@ -1,0 +1,20 @@
+{
+  "extends": "airbnb",
+  "parser"  : "babel-eslint",
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "jsx-quotes": [2, "prefer-single"],
+    "global-require": 0,
+    "no-return-assign": 0,
+    "react/forbid-prop-types": 0,
+    "react/prefer-stateless-function": 1
+  },
+  "ecmaFeatures": {
+    "experimentalObjectRestSpread": true
+  },
+}

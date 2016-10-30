@@ -1,0 +1,75 @@
+$orange: #FF4A1F;
+
+body {
+	padding: 0;
+	margin: 0;
+	background: rgba(240,240,240,0.9);
+	color: rgb(25,25,25);
+	text-align: center;
+	font-size: 30px;
+}
+
+.navigationWrapper {
+	background: rgb(40,40,40);
+	width: 100vw;
+	.linksWrapper {
+		margin: auto;
+	  display: flex;
+	  flex-direction: row;
+	  flex-wrap: wrap;
+	  justify-content: center;
+	  align-items: center;
+	  button {
+	  	color: black;
+			margin: 15px;
+			border: none;
+	  	padding: 5px 15px;
+	  	font-size: 28px;
+	  	background: rgba(245,245,245,1);
+	  }
+	  button:hover {
+			cursor: pointer;
+			background: rgba(250,250,250,0.8);
+		}
+	  a, a:visited {
+	  	text-decoration: none;
+	  	color: white;
+	  }
+	  .navLink {
+	  	margin: 2px 8px;
+	  }
+	  .authLink, .authLink:visited {
+	  	color: black
+	  }
+	  .activeRoute {
+	  	color: $orange !important;
+	  }
+	}
+}
+
+.loginForm, .signupForm {
+	width: 600px;
+	margin: auto;
+	h1 {
+		font-size: 45px;
+	}
+	input {
+		font-size: 28px;
+		margin: 10px;
+		width: 500px;
+		padding: 15px 10px;
+		border: 1px solid rgba(20,20,20,0.25);
+	}
+	button {
+		font-size: 32px;
+		padding: 10px 20px;
+		margin-bottom: 0;
+		border: 1px solid rgba(20,20,20,0.25);
+		background: white;
+		margin: 25px;
+	}
+	button:hover {
+		cursor: pointer;
+		background: rgba(220,220,220,0.2);
+	}
+}
