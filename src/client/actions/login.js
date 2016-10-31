@@ -33,6 +33,30 @@ function loginError(error) {
   }
 }
 
+export function checkAuth() {
+  return dispatch => {
+    return axios.post('http://127.0.0.1:3000/verify').then ( (res) => {
+      if (res.status === 201) {
+
+          const user = res.data;
+
+          // If login was successful, set the token in local storage
+          localStorage.setItem('user', user.user)
+          localStorage.setItem('id_token', user.id_token)
+
+          // Dispatch the success action
+          dispatch(receiveLogin(user))
+
+          browserHistory.push('/');
+        }
+      }).catch(err => { 
+        console.log('You are not authenticated', err.response.data);
+        dispatch(loginError(err.response.data));
+        })
+    }
+  }
+
+
 // Calls the API to get a token and dispatches actions along the way
 export function loginUser(creds) {
  
@@ -40,7 +64,7 @@ export function loginUser(creds) {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds))
 
-    return axios.post('http://localhost:3000/sessions/create', creds).then ( (res) => {
+    return axios.post('http://127.0.0.1:3000/sessions/create', creds).then ( (res) => {
       
       if (res.status === 201) {
 
@@ -90,7 +114,7 @@ export function registerUser(user) {
     dispatch(newSignUp(user))
 
     // Request is made to the server with the registration data
-    return axios.post('http://localhost:3000/register', user).then( (res) => {
+    return axios.post('http://127.0.0.1:3000/register', user).then( (res) => {
 
       let user = {
         user: res.data.username,

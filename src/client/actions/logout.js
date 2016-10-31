@@ -31,6 +31,6 @@ export function logoutUser() {
     localStorage.removeItem('id_token')
     localStorage.removeItem('user')
     dispatch(receiveLogout())
-    browserHistory.push('/')
+    browserHistory.push('/logout')
   }
 }

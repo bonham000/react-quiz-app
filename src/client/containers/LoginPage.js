@@ -21,7 +21,7 @@ class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: ''
     }
     this.handleInput = this.handleInput.bind(this);
@@ -34,11 +34,10 @@ class LoginPage extends React.Component {
   }
   submitLogin() {
 
-    const username = this.state.username;
-    const password = this.state.password;
+    const { email, password } = this.state;
 
-    if (username !== '' && password !== '') {
-      const creds = { username: username.trim(), password: password.trim() }
+    if (email !== '' && password !== '') {
+      const creds = { email: email.trim(), password: password.trim() }
       // dispatch login action 
       this.props.loginActions.loginUser(creds);
     }
@@ -51,15 +50,24 @@ class LoginPage extends React.Component {
 
         <h1>Log In Here</h1>
 
+        <div className = 'socialLogin'>
+          <a className = "btn btn-block btn-social btn-twitter" href = "/auth/twitter">
+            <span className = "fa fa-twitter"></span> Sign in with Twitter
+          </a>
+           <a className = "btn btn-block btn-social btn-github" href = "/auth/github">
+            <span className = "fa fa-github"></span> Sign in with GitHub
+          </a>
+        </div>
+
         { errorMessage && <div className = 'errorsBox'>
           <p>{errorMessage}</p></div> }
 
         <input
           type = 'text'
-          name = 'username'
+          name = 'email'
           className = "loginInput"
-          placeholder = 'Username'
-          value = {this.state.username}
+          placeholder = 'Email Address'
+          value = {this.state.email}
           onChange = {this.handleInput} />
 
         <input
@@ -73,6 +81,8 @@ class LoginPage extends React.Component {
         <button onClick = {this.submitLogin}>
           Login
         </button>
+
+        <br />
 
       </div>
     );
