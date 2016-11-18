@@ -5,9 +5,9 @@ $blue: #06C1FF;
 body {
 	padding: 0;
 	margin: 0;
-	background: rgb(28,28,28);
+	background: rgb(250,250,250);
   background-size: cover;
-	color: rgb(225,225,225);
+	color: rgb(20,20,20);
 	text-align: center;
 	font-size: 30px;
 	font-family: 'Cabin', serif;
@@ -53,39 +53,36 @@ body {
 	 }
 }
 
-.navigationWrapper {
-	background: rgb(40,40,40);
-	background: #23231A;
+.navigationWrapper {	
+	background: $blue;
 	width: 100%;
-	border-bottom: 1px solid $blue;
 	.linksWrapper {
 		margin: auto;
 	  display: flex;
-	  flex-direction: row;
-	  flex-wrap: wrap;
-	  justify-content: center;
 	  align-items: center;
 	  a, a:visited {
 	  	text-decoration: none;
 	  	color: white;
 	  }
 	  .navLink {
-	  	margin: 10px 5px;
-	  	width: 225px;
+	  	margin: 8px 5px;
+	  	padding-top: 6px;
+	  	width: 125px;
 	  }
-	  .activeRoute {
-	  	color: $pink !important;
+	  #githubAuth {
+	  	width: 200px;
+	  	margin: 12px 5px 15px 12px;
+	  	padding-top: 7px;
+	  	color: white;
 	  }
-		.socialLogin {
-			margin: 15px 5px;
-			a, a:visited {
-				width: 225px;
-				margin: 5px;
-			}
-			a:hover {
-				color: white;
-			}
-		}	  
+	  #githubAuth {
+	  	a:hover {
+	  		color: white;
+	  	}
+	  }
+	  .navLink:hover {
+	  	color: black !important;
+	  }
 	}
 }
 
@@ -120,7 +117,6 @@ body {
 		padding-bottom: 10px;
 		.linksWrapper {
 			margin: auto;
-		  display: flex;
 		  flex-direction: column;
 		  flex-wrap: wrap;
 		  justify-content: center;
@@ -129,7 +125,7 @@ body {
 		  .navLink {
 		  	font-size: 28px;
 		  	margin: 5px;
-		  	width: 100vw;
+		  	width: 100%;
 		  }
 		  button {
 		  	background: none;
@@ -138,6 +134,10 @@ body {
 				margin: 0;
 				padding: 0;
 		  }
+			#githubAuth {
+				font-size: 15px;
+				width: 65vw;
+			}
 		}
 	}
 	.aboutWrapper {
@@ -160,15 +160,6 @@ body {
 		}
 		.credits {
 			width: 85vw;
-		}
-	}
-}
-
-@media only screen and (max-width: 550px) {
-	.btn-social {
-		margin: 15px 5px;
-		a, a:visited {
-			font-size: 22px;
 		}
 	}
 }

@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
 
-import { DEV_HOST } from '../constants/host'
+import { DEV_HOST, PROD_HOST } from '../constants/host'
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+const HOST = DEV_HOST;
+
+export const LOGIN_REQUEST  = 'LOGIN_REQUEST'
+export const LOGIN_SUCCESS  = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE  = 'LOGIN_FAILURE'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 
 function requestLogin(creds) {
@@ -37,7 +39,7 @@ function loginError(error) {
 
 export function checkAuth() {
   return dispatch => {
-    return axios.post(`${DEV_HOST}/verify`).then ( (response) => {
+    return axios.post(`${HOST}/verify`).then ( (response) => {
       if (response.status === 201) {
 
           const user = response.data;
