@@ -2,20 +2,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { checkAuth } from '../actions/login'
+import { checkAuth } from '../actions/auth'
 
-// this component dispatches and action to verify passport 3rd party authentication after redirect from the server
+// this component dispatches and action to verify
+// passport 3rd party authentication after redirect
+// from the server
+
 @connect(
 	null,
 	dispatch => ({
-		passport: bindActionCreators(checkAuth, dispatch)
+		checkAuth: bindActionCreators(checkAuth, dispatch)
 	})
 )
 class PassportAuth extends React.Component {
-	componentWillMount() { this.props.passport() }
+	componentWillMount() { this.props.checkAuth() }
 	render() {
 		return (
-			<div></div>
+			<div />
 		);
 	}
 }

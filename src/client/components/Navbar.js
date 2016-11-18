@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-import { logoutUser } from '../actions/logout'
+import { logoutUser } from '../actions/auth'
 
 class Navbar extends Component {
   static propTypes = {
@@ -21,10 +21,9 @@ class Navbar extends Component {
               <Link to = '#' className = 'navLink' onClick = { () => dispatch(logoutUser()) }>Logout</Link> }
 
             { !isAuthenticated &&
-              <Link to = 'login' className = 'navLink' activeClassName = 'activeRoute'>Login</Link> }
-
-            { !isAuthenticated &&
-              <Link to = 'signup' className = 'navLink' activeClassName = 'activeRoute'>Sign Up</Link> }
+                <a className = "btn btn-block btn-social btn-github navLink" href = "/auth/github">
+                  <span className = "fa fa-github"></span> Sign in with GitHub
+                </a> }
 
           </div>
         </div>

@@ -13,9 +13,6 @@ import passport from 'passport'
 
 dotenv.config();
 
-// need to add .env and then set mongo URL, twitter and github secret keys, and cookie parser secret
-// need to reset routes in actions/login for production
-
 const url = process.env.MONGO_HOST;
 
 import mongoose from 'mongoose'

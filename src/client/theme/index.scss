@@ -5,9 +5,9 @@ $blue: #06C1FF;
 body {
 	padding: 0;
 	margin: 0;
-	background: #FFEDE1;
+	background: rgb(28,28,28);
   background-size: cover;
-	color: rgb(25,25,25);
+	color: rgb(225,225,225);
 	text-align: center;
 	font-size: 30px;
 	font-family: 'Cabin', serif;
@@ -56,7 +56,8 @@ body {
 .navigationWrapper {
 	background: rgb(40,40,40);
 	background: #23231A;
-	width: 100vw;
+	width: 100%;
+	border-bottom: 1px solid $blue;
 	.linksWrapper {
 		margin: auto;
 	  display: flex;
@@ -69,54 +70,22 @@ body {
 	  	color: white;
 	  }
 	  .navLink {
-	  	margin: 10px 20px;
-	  }
-	  .navLink:hover {
-			color: rgba(250,250,250,0.85);
-			color: $pink;
+	  	margin: 10px 5px;
+	  	width: 225px;
 	  }
 	  .activeRoute {
-	  	color: $blue !important;
+	  	color: $pink !important;
 	  }
-	}
-}
-
-.loginForm, .signupForm {
-	width: 600px;
-	margin: auto;
-	padding-top: 8px;
-	h1 {
-		font-size: 45px;
-	}
-	input {
-		font-size: 28px;
-		margin: 10px;
-		width: 500px;
-		padding: 15px 10px;
-		border: 1px solid rgba(20,20,20,0.25);
-	}
-	button {
-		font-size: 32px;
-		padding: 10px 20px;
-		margin-bottom: 0;
-		border: 1px solid rgba(20,20,20,0.25);
-		background: white;
-		margin: 25px;
-		font-family: 'Proza Libre', serif;
-	}
-	button:hover {
-		cursor: pointer;
-		background: rgba(220,220,220,0.2);
-	}
-	.socialLogin {
-		margin: 15px auto;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		a, a:visited {
-			width: 225px;
-			margin: 5px;
-		}
+		.socialLogin {
+			margin: 15px 5px;
+			a, a:visited {
+				width: 225px;
+				margin: 5px;
+			}
+			a:hover {
+				color: white;
+			}
+		}	  
 	}
 }
 
@@ -195,37 +164,14 @@ body {
 	}
 }
 
-@media only screen and (max-width: 600px) {
-	.loginForm, .signupForm {
-		width: 100vw;
-		margin: auto;
-		h1 {
-			font-size: 40px;
-		}
-		input {
-			font-size: 24px;
-			margin: 8px;
-			width: 80vw;
-			padding: 12px 8px;
-		}
-		button {
-			font-size: 28px;
-			padding: 8px 16px;
-			margin: 18px;
-		}
-		.socialLogin {
-			margin: 15px auto;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			a, a:visited {
-				width: 225px;
-				margin: 5px auto;
-			}
+@media only screen and (max-width: 550px) {
+	.btn-social {
+		margin: 15px 5px;
+		a, a:visited {
+			font-size: 22px;
 		}
 	}
 }
-
 
 
 

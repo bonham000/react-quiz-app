@@ -14,11 +14,7 @@ class About extends React.Component {
  	render() {
  		return (
 		  <div className = 'aboutWrapper'>
-		    <h1>Welcome to the Free Code Camp Nightlife Coordination App</h1>
-
-		    { !this.props.isAuthenticated && <div>
-		    	<h3>Please <Link to = '/login'>login</Link> or <Link to = '/signup'>sign up</Link> to view local bars in your area and mark that you are attending.</h3>
-		    </div> }
+		    <h1>Welcome to the React Quiz App!</h1>
 
 				{ this.props.isAuthenticated && <div>
 					<h2>Welcome {localStorage.getItem('user')}</h2>
