@@ -190,6 +190,17 @@ body {
 	.proceedBtn:hover {
 		background: #28FFA8;
 	}
+	.editBtn {
+		width: 265px;
+		margin: 5px;
+		font-size: 20px;
+		padding: 4px;
+		border: 1px solid black;
+		background: #FFE97F;
+	}
+	.editBtn:hover {
+		background: #FFE255;
+	}
 	.message {
 		margin-top: 25px;
 		font-size: 25px;
@@ -327,7 +338,7 @@ body {
 			width: 95vw;
 			margin: auto;
 		}
-		.proceedBtn {
+		.proceedBtn, .editBtn {
 			width: 85vw;
 			font-size: 18px;
 			margin: 3px auto;
