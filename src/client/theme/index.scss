@@ -10,8 +10,11 @@ body {
 	color: rgb(20,20,20);
 	text-align: center;
 	font-size: 30px;
-	font-family: 'Cabin', serif;
 	font-family: 'Proza Libre', serif;
+	font-family: 'Cabin', serif;
+	font-family: 'Gentium Basic', serif;
+	font-family: 'Fenix', serif;
+	font-family: 'Esteban', serif;
 	.errorsBox {
 		color: #E71A3A;
 	}
@@ -48,32 +51,32 @@ body {
 	a:hover {
 		color: $pink;
 	}
-	.credits {
-	  	width: 55vw;
-	 }
 }
 
 .navigationWrapper {	
 	background: $blue;
 	width: 100%;
+	min-height: 55px;
+	padding-left: 25px;
+	border-bottom: 1px solid rgba(15,15,15,0.5);
 	.linksWrapper {
 		margin: auto;
-	  display: flex;
-	  align-items: center;
 	  a, a:visited {
 	  	text-decoration: none;
 	  	color: white;
 	  }
 	  .navLink {
-	  	margin: 8px 5px;
-	  	padding-top: 6px;
-	  	width: 125px;
+	  	margin: 5px 12px;
+	  	float: left;
 	  }
 	  #githubAuth {
 	  	width: 200px;
-	  	margin: 12px 5px 15px 12px;
+	  	margin-top: 10px;
+	  	margin-right: 15px;
 	  	padding-top: 7px;
 	  	color: white;
+	  	position: relative;
+	  	float: right;
 	  }
 	  #githubAuth {
 	  	a:hover {
@@ -86,28 +89,25 @@ body {
 	}
 }
 
-@media only screen and (max-width: 900px) {
-	.aboutWrapper {
-		h1 {
-			width: 85vw;
-			font-size: 36px;
-			margin-top: 15px;
-		}
-		h2 {
-			font-size: 32px;
-			width: 70vw;
-		}
-		h3 {
-			font-size: 28px;
-			width: 70vw;
-		}
-		p {
-			font-size: 22px;
-			width: 75vw;
-		}
-		.credits {
-			width: 75vw;
-		}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	min-height: 35px;
+	background: rgb(30,30,30);
+	p {
+		color: $blue;
+		font-size: 14px;
+		float: right;
+		padding-top: 2px;
+		padding-right: 7px;
+		margin: 4px;
+	}
+	a, a:visited {
+		color: white;
+	}
+	a:hover {
+		color: $blue;
 	}
 }
 
@@ -117,6 +117,7 @@ body {
 		padding-bottom: 10px;
 		.linksWrapper {
 			margin: auto;
+			display: flex;
 		  flex-direction: column;
 		  flex-wrap: wrap;
 		  justify-content: center;
@@ -161,6 +162,9 @@ body {
 		.credits {
 			width: 85vw;
 		}
+	}
+	.footer {
+		padding: 8px;
 	}
 }
 

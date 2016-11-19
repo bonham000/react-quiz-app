@@ -25,8 +25,8 @@ export default class Navbar extends Component {
       <div className = "navigationWrapper">
         <div className = "linksWrapper">
 
-          { isAuthenticated && 
-            <Link to = '/' className = 'navLink' activeClassName = 'activeRoute'>Home</Link> }
+            <Link to = '/' className = 'navLink' activeClassName = 'activeRoute'>Home</Link>
+            <Link to = 'quiz' className = 'navLink' activeClassName = 'activeRoute'>Quiz</Link>
 
           { !isAuthenticated &&
             <a className = "btn btn-block btn-social btn-github" id = 'githubAuth' href = "/auth/github">
@@ -34,7 +34,10 @@ export default class Navbar extends Component {
             </a> }
 
           { isAuthenticated &&
-            <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }              
+            <Link to = 'create' className = 'navLink' activeClassName = 'activeRoute'>Create</Link> }
+
+          { isAuthenticated &&
+            <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }             
 
         </div>
       </div>

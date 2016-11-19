@@ -4,33 +4,27 @@ import { browserHistory, Link } from 'react-router'
 
 @connect(
 	state => ({
-		isAuthenticated: state.auth.isAuthenticated
+		isAuthenticated: state.auth.isAuthenticated,
+		user: state.auth.user
 	})
 )
 class About extends React.Component {
 	static propTypes = {
-		isAuthenticated: React.PropTypes.bool.isRequired
+		isAuthenticated: React.PropTypes.bool.isRequired,
+		user: React.PropTypes.string.isRequired
 	}
  	render() {
  		return (
 		  <div className = 'aboutWrapper'>
 
-		    <h1>Welcome to the React Quiz App!</h1>
+				{ this.props.isAuthenticated ? 
+		    <h1>Welcome to the React Quiz App {this.props.user}!</h1> :
+		    <h1>Welcome to the React Quiz App!</h1> }
 
-				{
-
-					this.props.isAuthenticated
-
-					&&
-
+				{ this.props.isAuthenticated &&
 					<div>
-						<h2>Welcome {localStorage.getItem('user')}</h2>
-						<p>This app will help you learn React and Redux, awesome new front-end web app tools!</p>
-						<h3 className = 'credits'><a target = "_blank" href = "https://github.com/bonham000/voting-app">View the source on GitHub</a></h3>
-						<h3 className = 'credits'>This app was created with React and Redux and is a <a target = "_blank" href = "https://www.freecodecamp.com/challenges/build-a-voting-app">project for Free Code Camp</a>.</h3>
-					</div>
-
-				}
+						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! <Link to = 'quiz'>Visit the Quiz</Link> to get started, but you can also use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
+					</div> }
 
 		  </div>
 	  );
