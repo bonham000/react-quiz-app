@@ -1,6 +1,8 @@
 $orange: #FF4A1F;
 $pink: #FE0253;
+$error: #E71A3A;
 $blue: #06C1FF;
+$mint: #1AF59D;
 
 body {
 	padding: 0;
@@ -111,6 +113,78 @@ body {
 	}
 }
 
+.createComponent {
+	h1 {
+		margin: 25px auto;
+	}
+	.subtitle {
+		width: 550px;
+		margin: 15px auto;
+		font-size: 20px;
+	}
+	.answerContainer {
+		width: 550px;
+		margin: 5px auto;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.inputTitles {
+		width: 550px;
+		margin: 10px auto;
+		text-align: left;
+		font-size: 18px;
+		font-weight: bold;
+	}
+	input {
+		display: block;
+		font-size: 20px;
+		padding: 6px;
+		width: 550px;
+		margin: auto;
+	}
+	.answerTitle {
+		font-family: 'Cabin', serif;
+	}
+	.answerInput {
+		font-family: 'Cabin', serif;
+	}
+	.addOption {
+		width: 550px;
+		margin: 5px auto;
+		padding: 4px;
+		font-size: 22px;
+		border: 1px solid black;
+		background: $blue;
+	}
+	.addOption:hover {
+		background: #05D7FF;
+	}
+	.fa {
+		padding-left: 5px;
+	}
+	.fa:hover {
+		color: $error;
+		cursor: pointer;
+	}
+	.proceedWrapper {
+		width: 550px;
+		margin: 5px auto;
+	}
+	.proceedBtn {
+		width: 265px;
+		margin: 5px;
+		font-size: 20px;
+		padding: 4px;
+		border: 1px solid black;
+		background: $mint;
+	}
+	.proceedBtn:hover {
+		background: #28FFA8;
+	}
+}
+
 @media only screen and (max-width: 650px) {
 	.navigationWrapper {
 		padding-top: 5px;
@@ -165,6 +239,47 @@ body {
 	}
 	.footer {
 		padding: 8px;
+	}
+	.createComponent {
+		h1 {
+			font-size: 30px;
+			margin: 15px auto;
+		}
+		.subtitle {
+			width: 85vw;
+			font-size: 18px;
+			margin: 8px auto;
+		}
+		.answerContainer {
+			width: 95vw;
+		}
+		.inputTitles {
+			width: 90vw;
+			font-size: 16px;
+		}
+		input {
+			width: 95vw;
+		}
+		.answerInput {
+			font-size: 15px;
+		}
+		.answerTitle {
+			font-size: 15px;
+		}
+		.addOption {
+			width: 85vw;
+			font-size: 18px;
+			margin: 3px auto;
+		}
+		.proceedWrapper {
+			width: 95vw;
+			margin: auto;
+		}
+		.proceedBtn {
+			width: 85vw;
+			font-size: 18px;
+			margin: 3px auto;
+		}
 	}
 }
 
