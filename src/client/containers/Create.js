@@ -6,6 +6,8 @@ import React from 'react'
 // submit quiz (saves to database w/ author and title information)
 	// all saved quizzes then get loaded into the quiz component for study
 
+
+// need to connect with redux for user and dispatch
 export default class Create extends React.Component {
 	constructor() {
 		super();
@@ -17,6 +19,9 @@ export default class Create extends React.Component {
 			},
 			review: false,
 			reviewRequest: false,
+			editQuizTitleState: false,
+			editQuizTitle: '',
+			editReview: [],
 			title: false,
 			quizTitle: '',
 			questionTitle: '',
@@ -30,6 +35,10 @@ export default class Create extends React.Component {
 		this.removeOption = this.removeOption.bind(this);
 		this.submitAndContinue = this.submitAndContinue.bind(this);
 		this.submitAndReview = this.submitAndReview.bind(this);
+		this.editQuestion = this.editQuestion.bind(this);
+		this.handleEditQuizTitle = this.handleEditQuizTitle.bind(this);
+		this.submitTitleEdit = this.submitTitleEdit.bind(this);
+		this.cancelTitleEdit = this.cancelTitleEdit.bind(this);
 		this.saveQuiz = this.saveQuiz.bind(this);
 	}
 	handleKeyPress(key) {
@@ -115,6 +124,28 @@ export default class Create extends React.Component {
 				review: true
 			});
 		}
+	}
+	handleEditQuizTitle() {
+		this.setState({
+			editQuizTitleState: true,
+			editQuizTitle: this.state.quizTitle
+		});
+	}
+	submitTitleEdit() {
+		this.setState({
+			editQuizTitleState: false,
+			quizTitle: this.state.editQuizTitle,
+			editQuizTitle: ''
+		})
+	}
+	cancelTitleEdit() {
+		this.setState({
+			editQuizTitleState: false,
+			editQuizTitle: ''
+		});
+	}
+	editQuestion(idx) {
+		console.log('editing: ', idx);
 	}
 	saveQuiz() {
 		console.log('dispatching quiz saving action here');
@@ -215,13 +246,42 @@ export default class Create extends React.Component {
 
 						<div>
 							<h1 className = 'review'>Review Your Quiz</h1>
-							<h2 className = 'quizTitleReview'>Quiz Title: {this.state.quizTitle}</h2>
+							
+							{ !this.state.editQuizTitleState ? 
+
+								<h2 className = 'quizTitleReview'>
+									<i
+										onClick = {this.handleEditQuizTitle}
+										className = "fa fa-pencil-square-o fa-editQuestion"
+										aria-hidden = "true"></i>
+									Quiz Title: {this.state.quizTitle}
+								</h2>
+
+								:
+
+								<div>
+									<input
+									type = 'text'
+									name = 'editQuizTitle'
+									value = {this.state.editQuizTitle}
+									onChange = {this.handleInput} /> 
+									<button onClick = {this.submitTitleEdit}className = 'proceedBtn'>Submit Title Edit</button>
+									<button onClick = {this.cancelTitleEdit}className = 'proceedBtn'>Cancel Edit</button>
+								</div> }
+
 							{this.state.quiz.questions.map( (question, idx) => {
 								const { correctAnswer } = question;
 								return (
 									<div key = {idx}>
 										<p className = 'inputTitles'>Question {idx + 1}:</p>
-										<h2 className = 'questionTitleReview'>{question.questionTitle}</h2>
+										<h2 className = 'questionTitleReview'>
+											<i
+												onClick = {this.editQuestion.bind(this, idx)}
+												className = "fa fa-pencil-square-o fa-editQuestion"
+												aria-hidden = "true">
+											</i>
+											{question.questionTitle}
+										</h2>
 										<p className = 'inputTitles'>Answers:</p>
 										{question.answers.map( (answer, index) => {
 											let style = {
