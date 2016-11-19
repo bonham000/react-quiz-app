@@ -10,35 +10,31 @@ import dotenv from 'dotenv'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
-
+import mongoose from 'mongoose'
 dotenv.config();
 
 const url = process.env.MONGO_HOST;
+const secretString = process.env.SECRET_STRING;
 
-import mongoose from 'mongoose'
-
-import authRoutes from './routes/auth-routes'
 import apiRoutes from './routes/api-routes'
 import passportRoutes from './routes/passport'
 
 const app = express();
 
+if (NODE_ENV === 'development') { devConfig(app) } else { prodConfig(app) }
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-if (NODE_ENV === 'development') { devConfig(app) } else { prodConfig(app) }
-
 // test connection to database
-mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise;
 mongoose.connect(url, () => { console.log('connected through mongoose') });
 
 app.use(express.static('dist/client'));
 
-const secretString = process.env.SECRET_STRING;
-
 app.use(cookieParser(secretString));
 app.use(session({
-  secret: 'super secret key',
+  secret: secretString,
   resave: true,
   secure: false,
   saveUninitialized: true
@@ -52,8 +48,8 @@ passport.serializeUser(function(user, done) { done(null, user) });
 passport.deserializeUser(function(user, done) { done(null, user) });
 
 // connect authentication and api routes
-app.use(authRoutes);
 app.use(passportRoutes);
+app.use(apiRoutes);
 
 app.use(fallback(path.join(__dirname, '../../dist/client/index.html')));
 

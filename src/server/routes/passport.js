@@ -15,38 +15,25 @@ function createToken(username) { return jwt.sign({user: username}, secret, { exp
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+    callbackURL: process.env.GITHUB_CALLBACK_DEV
   },
   function(accessToken, refreshToken, profile, done) {
-    // search for user in database base on id = GitHub email address as unique identification
-    User.findOne({ id: profile.emails[0].value }, function(err, user) {
+    // search for user in database base
+    User.findOne({ id: profile.id }, function(err, user) {
       // handle error
       if (err) { return done(err) }
-      // if there is no user with this email, create a new one
+      // if there is no user with this email, create a new one and add to database
       if (!user) {
         user = new User({
-            id: profile.emails[0].value,
+            id: profile.id,
             displayName: profile.displayName,
-            username: profile.username,
-            password: '',
-            githubId: profile.id,
-            twitterId: '',
-            userData: []
         });
         user.save(function(err) {
             if (err) console.log(err);
             return done(err, user);
         });
-      // if user already has an account with this email, add their github ID  
-      } else if (profile.emails[0].value === user.id) {
-        user.githubId = profile.id
-        user.save(function(err) {
-            if (err) console.log(err);
-            return done(err, user);
-        });
-      // user has logged in before, return user and proceed
+      // if they have already signed up, let them proceed
       } else {
-          console.log('user,', user);
           return done(err, user);
       }
     });

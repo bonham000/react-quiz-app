@@ -1,33 +1,30 @@
 import express from 'express'
-import assert from 'assert'
 import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken'
 import secret from '../jwt-config'
 import dotenv from 'dotenv'
 dotenv.config();
 
-import mongodb from 'mongodb'
-const MongoClient = mongodb.MongoClient;
-const url = process.env.MONGO_HOST;
-
 const app = module.exports = express.Router();
 
-app.post('/api/protected', (req, res) => {
+app.get('/get-quizzes', (req, res) => {
 
-	let token = req.body.token;
+	// connect to database, retrieve all quizzes, and return array to client
 
+});
+
+app.post('/create-quiz', (req, res) => {
+
+	const { quiz, user, token } = req.body;
+	
 	jwt.verify(token, secret, (err, decoded) => {
-		if (!err) {
-				MongoClient.connect(url, (err, db) => {
-					assert.equal(null, err);
-					
-				 	res.end();
-					db.close();
-				});
+	
+		if (err) {
+			res.status(401).send('Only authorized users can create quizzes.');
+		} else {
+			// submit quiz to database
 		}
-		else {
-			res.status(401).send('Token invalid, request denied.');
-		}
+
 	});
 
 });
