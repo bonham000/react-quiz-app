@@ -15,10 +15,13 @@ export default class Create extends React.Component {
 				title: '',
 				questions: []
 			},
+			review: false,
+			reviewRequest: false,
 			title: false,
 			quizTitle: '',
 			questionTitle: '',
-			answers: ['']
+			answers: [''],
+			correctAnswer: null
 		}
 		this.handleKeyPress = this.handleKeyPress.bind(this);
 		this.setQuizTitle = this.setQuizTitle.bind(this);
@@ -27,6 +30,7 @@ export default class Create extends React.Component {
 		this.removeOption = this.removeOption.bind(this);
 		this.submitAndContinue = this.submitAndContinue.bind(this);
 		this.submitAndReview = this.submitAndReview.bind(this);
+		this.saveQuiz = this.saveQuiz.bind(this);
 	}
 	handleKeyPress(key) {
 		if (key.keyCode === 9) {
@@ -68,27 +72,72 @@ export default class Create extends React.Component {
 			this.setState({ answers });
 		}
 	}
-	submitAndContinue() {
-		const { quiz, answers, questionTitle } = this.state;
-		const question = {
-			questionTitle,
-			answers
-		}
-		quiz.questions.push(question);
+	setCorrectAnswer(idx) {
 		this.setState({
-			quiz,
-			questionTitle: '',
-			answers: ['']
+			correctAnswer: idx
 		});
 	}
+	submitAndContinue() {
+		const { quiz, answers, correctAnswer, questionTitle } = this.state;
+		const filteredAnswers = answers.filter( (answer) => answer !== '' );
+		if (correctAnswer !== null && questionTitle !== '' && filteredAnswers.length > 1) {
+			const question = {
+				questionTitle,
+				correctAnswer,
+				answers: filteredAnswers
+			}
+			quiz.questions.push(question);
+			this.setState({
+				quiz,
+				questionTitle: '',
+				answers: [''],
+				correctAnswer: null,
+				message: 'Question Added!'
+			});
+			setTimeout( () => { this.setState({ message: '' }) }, 3000);
+		}
+	}
 	submitAndReview() {
-
+		const { quiz, answers, correctAnswer, questionTitle } = this.state;
+		const filteredAnswers = answers.filter( (answer) => answer !== '' );
+		if (correctAnswer !== null && questionTitle !== '' && filteredAnswers.length > 1) {
+			const question = {
+				questionTitle,
+				correctAnswer,
+				answers: filteredAnswers
+			}
+			quiz.questions.push(question);
+			this.setState({
+				quiz,
+				questionTitle: '',
+				answers: [''],
+				correctAnswer: null,
+				review: true
+			});
+		}
+	}
+	saveQuiz() {
+		console.log('dispatching quiz saving action here');
 	}
 	render() {
-		const renderAnswers = this.state.answers.map( (ans, idx) => {
+		const { correctAnswer, answers } = this.state;
+		const renderAnswers = answers.map( (ans, idx) => {
 			const { answers } = this.state;
 			return (
 				<div className = 'answerContainer' key = {idx}>
+
+					{ correctAnswer === idx ?
+					
+						<i className = "fa fa-check-box fa-check-square-o" aria-hidden = "true"></i>
+
+					:
+
+						<i
+							id = 'checkBox'
+							className = "fa fa-check-box fa-square-o"
+							aria-hidden = "true"
+							onClick = {this.setCorrectAnswer.bind(this, idx)}></i> }
+
 					<input
 						type = 'text'
 						name = {'answer_', {ans}}
@@ -106,7 +155,7 @@ export default class Create extends React.Component {
 		return (
 			<div className = 'createComponent'>
 				
-				{ !this.state.title ? 
+				{ !this.state.title && !this.state.review &&
 
 					<div>
 						<h1>Create a Quiz</h1>
@@ -124,12 +173,13 @@ export default class Create extends React.Component {
 								onClick = {this.setQuizTitle}>
 								Submit Title and Add Questions
 							</button>
-					</div>
+					</div> }
 
-					:
+					{ this.state.title && !this.state.review &&
 
 					<div className = 'createQuizContainer'>
-						<h1>Add Questions for {this.state.quizTitle}:</h1>
+						<h1>Add Questions for Your Quiz:</h1>
+						<p className = 'subtitle'>Be sure to add at least two answers and check the box next to correct one!</p>
 						<p className = 'inputTitles'>Question:</p>
 						<input
 							type = 'text'
@@ -158,6 +208,43 @@ export default class Create extends React.Component {
 							</button>
 						</div>
 					</div> }
+
+					{ !this.state.review && <p className = 'message'>{this.state.message}</p> }
+
+					{ this.state.review &&
+
+						<div>
+							<h1 className = 'review'>Review Your Quiz</h1>
+							<h2 className = 'quizTitleReview'>Quiz Title: {this.state.quizTitle}</h2>
+							{this.state.quiz.questions.map( (question, idx) => {
+								const { correctAnswer } = question;
+								return (
+									<div key = {idx}>
+										<p className = 'inputTitles'>Question {idx + 1}:</p>
+										<h2 className = 'questionTitleReview'>{question.questionTitle}</h2>
+										<p className = 'inputTitles'>Answers:</p>
+										{question.answers.map( (answer, index) => {
+											let style = {
+												background: 'rgba(225,225,225,0.5)'
+											}
+											if (correctAnswer === index) {
+												style = {
+													background: '#06C1FF'
+												}
+											}
+											return (
+												<div className = 'answerReview' key = {index} style = {style}>
+													<p>{answer}</p>
+												</div>
+											);
+										}) }
+									</div>
+								);
+							}) }
+							<button className = 'saveBtn' onClick = {this.saveQuiz}>Save and Submit Your Quiz</button>
+						</div>
+
+					}
 
 			</div>
 		);

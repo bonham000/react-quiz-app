@@ -22,8 +22,8 @@ class About extends React.Component {
 		    <h1>Welcome to the React Quiz App!</h1> }
 
 				{ this.props.isAuthenticated &&
-					<div>
-						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! <Link to = 'quiz'>Visit the Quiz</Link> to get started, but you can also use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
+					<div className = 'description'>
+						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! <Link to = 'quiz'>Go ahead and take the Quiz</Link>, or you can also use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
 					</div> }
 
 		  </div>
