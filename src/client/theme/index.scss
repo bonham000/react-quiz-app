@@ -543,6 +543,53 @@ body {
 			font-size: 22px;
 		}
 	}
+	.studyWrapper {
+		.studyContainer {
+			padding-bottom: 45px;
+			.quizTitle {
+				font-size: 40px;
+				width: 90vw;
+				padding-bottom: 15px;
+				margin: 35px auto;
+			}
+			.quizLength {
+				font-size: 20px;
+			}
+			.questionTitle {
+				font-size: 28px;
+				width: 90vw;
+				margin: 25px auto;
+			}
+			.answerContainer {
+				width: 95vw;
+				margin: 8px auto;
+				padding-bottom: 5px;
+				h2 {
+					padding-left: 12px;
+					font-size: 18px;
+				}
+			}
+			.answerContainer:hover {
+				border: 1px solid $blue;
+				cursor: pointer;
+			}
+			button {
+				width: 80vw;
+				margin: 12px;
+				font-size: 26px;
+			}
+			.messageDiv {
+				h1 {
+					font-size: 24px;
+				}
+			}
+			.scoreMessage {
+				width: 90vw;
+				margin: 8px auto;
+				font-size: 24px;
+			}
+		}
+	}
 }
 
 

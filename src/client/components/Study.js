@@ -33,6 +33,7 @@ export default class Study extends React.Component {
 	render() {
 		const { index, quiz } = this.state;
 		const currentQuestion = quiz.questions[index];
+		const percentage = this.state.score / this.props.quiz.questions.length;
 		return (
 			<div className = 'studyWrapper'>
 				<div className = 'studyContainer'>
@@ -105,15 +106,15 @@ export default class Study extends React.Component {
 						}) }
 
 					{ this.state.answer !== null && !this.state.complete &&
-						<div>
+						<div className = 'messageDiv'>
 							{ this.state.answer ? <h1 className = 'correctAnswer'>Correct, nice job!</h1> : <h1 className = 'wrongAnswer'>Sorry, that's not correct!</h1> }
 							<button onClick = {this.nextQuestion}>Next Question</button>
 						</div> }
 
 					{ this.state.complete &&
 						<div>
-							<h1>You scored {this.state.score} correct out of {this.props.quiz.questions.length} questions!</h1>
-							<button onClick = {this.props.endStudy}>Finish Study</button>
+							<h1 className = 'scoreMessage'>You scored {this.state.score} correct out of {this.props.quiz.questions.length} questions! { percentage > 0.75 ? 'Not bad!' : 'Better luck next time!'}</h1>
+							<button onClick = {this.props.endStudy.bind(this, this.state.score)}>Finish Study</button>
 						</div> }
 
 				</div>

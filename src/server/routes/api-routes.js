@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 import Quiz from '../models/quiz'
+import Leaderboard from '../models/leaderboard'
 
 const app = module.exports = express.Router();
 
@@ -37,3 +38,53 @@ app.post('/save-quiz', (req, res) => {
 		}
 	});
 });
+
+app.post('/submit-score', (req, res) => {
+	const { user, score, quiz } = req.body;
+	Leaderboard.findOne({ quiz: quiz }, (err, leaderboard) => {
+		if (err) throw err;
+		if (!leaderboard) {
+			leaderboard = new Leaderboard({
+				quiz,
+				leaders: [
+					{
+						user,
+						score
+					}
+				]
+			});
+			leaderboard.save( (err) => {
+				if (err) throw err;
+				res.status(201).send('score saved!');
+			});
+		} else {
+			// if board exists, verify that user has not already submitted a score
+			const checkLeaders = leaderboard.leaders.filter( (leader) => leader.user === user );
+			if (checkLeaders.length === 0) {
+				leaderboard.leaders.concat({
+					user,
+					score
+				});
+				leaderboard.save( (err) => {
+					if (err) throw err;
+					res.status(201).send('score saved!');
+				});
+			} else {
+				res.status(401).send('Only your first score counts for the leaderboard!');
+			}
+		}
+	});
+});
+
+
+app.get('/get-leaders', (req, res) => {
+	Leaderboard.find({}, (err, data) => {
+		if (err) throw err;
+		res.status(201).send(data);
+	});
+});
+
+
+
+
+

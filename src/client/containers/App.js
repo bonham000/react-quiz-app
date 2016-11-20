@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getQuizzes } from '../actions/quiz'
+import { getQuizzes, getLeaders } from '../actions/quiz'
 
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -11,7 +11,8 @@ import Footer from '../components/Footer'
 @connect( 
 	null,
 	dispatch => ({
-		getQuizzes: bindActionCreators(getQuizzes, dispatch)
+		getQuizzes: bindActionCreators(getQuizzes, dispatch),
+    getLeaders: bindActionCreators(getLeaders, dispatch)
 	})
 )
 export default class App extends React.Component {
@@ -24,5 +25,8 @@ export default class App extends React.Component {
       </div>
     )
   }
-  componentDidMount() { this.props.getQuizzes() }
+  componentDidMount() {
+    this.props.getQuizzes();
+    this.props.getLeaders();
+  }
 }

@@ -1,13 +1,20 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import { submitScore } from '../actions/quiz'
 
 import Study from '../components/Study'
 
 @connect(
 	state => ({
-		quizzes: state.quiz
+		quizzes: state.quiz,
+		user: state.auth.user,
+		isAuthenticated: state.auth.isAuthenticated
 	}),
-	null
+	dispatch => ({
+		submitScore: bindActionCreators(submitScore, dispatch)
+	})
 )
 export default class Quiz extends React.Component {
 	constructor() {
@@ -32,7 +39,18 @@ export default class Quiz extends React.Component {
 		const quiz = this.props.quizzes.filter( (quiz) => quiz.title === selectedQuiz );
 		this.setState({ quiz: quiz[0], session: true });
 	}
-	endStudy() { this.setState({ session: false }) }
+	endStudy(score) {
+		this.setState({ session: false });
+		if (this.props.isAuthenticated) {
+			const { user } = this.props;
+			const scoreData = {
+				user,
+				score,
+				quiz: this.state.selectedQuiz
+			}
+			this.props.submitScore(scoreData);
+		}
+	}
 	render() {
 		if (this.state.session) {
 			return (

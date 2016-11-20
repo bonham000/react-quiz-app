@@ -1,3 +1,4 @@
 
 export const ADD_QUIZ = 'ADD_QUIZ'
-export const SAVE_QUIZZES = 'GET_QUIZZES'
+export const SAVE_QUIZZES = 'SAVE_QUIZZES'
+export const CREATE_LEADERBOARD = 'CREATE_LEADERBOARD'
