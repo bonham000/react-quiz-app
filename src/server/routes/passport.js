@@ -26,7 +26,7 @@ passport.use(new GitHubStrategy({
       if (!user) {
         user = new User({
             id: profile.id,
-            displayName: profile.displayName,
+            username: profile.displayName,
         });
         user.save(function(err) {
             if (err) console.log(err);

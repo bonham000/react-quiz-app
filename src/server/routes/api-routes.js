@@ -5,6 +5,8 @@ import secret from '../jwt-config'
 import dotenv from 'dotenv'
 dotenv.config();
 
+import Quiz from '../models/quiz'
+
 const app = module.exports = express.Router();
 
 app.get('/get-quizzes', (req, res) => {
@@ -13,9 +15,9 @@ app.get('/get-quizzes', (req, res) => {
 
 });
 
-app.post('/create-quiz', (req, res) => {
+app.post('/save-quiz', (req, res) => {
 
-	const { quiz, user, token } = req.body;
+	const { quiz: quizData, user, token } = req.body;
 	
 	jwt.verify(token, secret, (err, decoded) => {
 	
@@ -23,6 +25,17 @@ app.post('/create-quiz', (req, res) => {
 			res.status(401).send('Only authorized users can create quizzes.');
 		} else {
 			// submit quiz to database
+
+			const quiz = new Quiz({
+				author: user,
+				title: quizData.title,
+				questions: quizData.questions
+			});
+			quiz.save( (err) => {
+				if (err) throw err;
+				res.status(201).send('submission success!');
+			});
+			
 		}
 
 	});

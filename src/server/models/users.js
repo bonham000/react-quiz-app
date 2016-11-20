@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const User = new Schema({
 		id: String,
-		displayName: String
+		username: String
 });
 
 export default mongoose.model('User', User);

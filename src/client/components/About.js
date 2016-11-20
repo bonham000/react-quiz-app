@@ -10,8 +10,7 @@ import { browserHistory, Link } from 'react-router'
 )
 class About extends React.Component {
 	static propTypes = {
-		isAuthenticated: React.PropTypes.bool.isRequired,
-		user: React.PropTypes.string.isRequired
+		isAuthenticated: React.PropTypes.bool.isRequired
 	}
  	render() {
  		return (
@@ -21,9 +20,14 @@ class About extends React.Component {
 		    <h1>Welcome to the React Quiz App {this.props.user}!</h1> :
 		    <h1>Welcome to the React Quiz App!</h1> }
 
+		    { !this.props.isAuthenticated && 
+					<div className = 'description'>
+						<p>You can go ahead and <Link to = 'quiz'>take the Quiz</Link>, or login with GitHub to create your own.</p>
+					</div> }
+
 				{ this.props.isAuthenticated &&
 					<div className = 'description'>
-						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! <Link to = 'quiz'>Go ahead and take the Quiz</Link>, or you can also use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
+						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! Go ahead and <Link to = 'quiz'>take the Quiz</Link>, or you can also use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
 					</div> }
 
 		  </div>

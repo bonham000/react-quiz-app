@@ -51,6 +51,7 @@ body {
 	}
 	a, a:visited {
 		color: rgb(25,25,25);
+		text-decoration: underline;
 	}
 	a:hover {
 		color: $pink;
@@ -190,16 +191,32 @@ body {
 	.proceedBtn:hover {
 		background: #28FFA8;
 	}
+	.editButtonsWrapper, .editTitleWrapper {
+		margin-top: 25px;
+	}
 	.editBtn {
-		width: 265px;
-		margin: 5px;
+		width: 500px;
+		display: block;
+		margin: 5px auto;
 		font-size: 20px;
 		padding: 4px;
 		border: 1px solid black;
-		background: #FFE97F;
+		background: #FF714B;
 	}
 	.editBtn:hover {
+		background: #FF4E1F;
+	}
+	.addOptionEdit {
+		background: #FFE97F;
+	}
+	.addOptionEdit:hover {
 		background: #FFE255;
+	}
+	.submitEdit {
+		background: $blue;
+	}
+	.submitEdit:hover {
+		background: #05D7FF;
 	}
 	.message {
 		margin-top: 25px;
@@ -234,17 +251,46 @@ body {
 			font-family: 'Cabin', serif;
 		}
 	}
+	.reviewBtnControl {
+		width: 550px;
+		margin: 25px auto;
+	}
+	.reviewAddBtn {
+		width: 550px;
+		margin: 5px auto;
+		font-size: 24px;
+		padding: 4px;
+		border: 1px solid black;
+		background: #FFE97F;		
+	}
+	.reviewAddBtn:hover {
+		background: #FFE255;
+	}
 	.saveBtn {
 		width: 550px;
-		margin: 25px auto 15px auto;
+		margin: 5px auto;
 		font-size: 24px;
 		padding: 4px;
 		border: 1px solid black;
 		background: $mint;
 	}
+	.saveBtn:hover {
+		background: #28FFA8;
+	}
 	.fa-editQuestion {
 		margin-right: 4px;
 		margin-top: 2px;
+	}
+	.submissionSuccess {
+		margin-top: 25px;
+		padding: 5px 8px;
+		a, a:visited {
+			color: rgb(25,25,25);
+			text-decoration: underline;
+		}
+		a:hover {
+			color: $pink;
+		}
 	}
 }
 
@@ -363,6 +409,30 @@ body {
 			p {
 				font-size: 16px;
 			}
+		}
+		.reviewBtnControl {
+			width: 90vw;
+			margin: 25px auto;
+		}
+		.reviewAddBtn {
+			width: 85vw;
+			font-size: 20px;
+			margin: 5px auto;
+		}
+		.saveBtn {
+			width: 85vw;
+			font-size: 20px;
+			margin: 5px auto;
+		}
+	}
+	.submissionSuccess {
+		margin-top: 20px;
+		padding: 5px 12px;
+		h1 {
+			font-size: 28px;
+		}
+		h2 {
+			font-size: 24px;
 		}
 	}
 }

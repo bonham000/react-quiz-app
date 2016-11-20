@@ -1,14 +1,24 @@
 import React from 'react'
+import { browserHistory, Link } from 'react-router'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-// quiz title
-// add questions w/ answer choices
-// review quiz
-// submit quiz (saves to database w/ author and title information)
-	// all saved quizzes then get loaded into the quiz component for study
+import { saveNewQuiz } from '../actions/quiz'
 
-
-// need to connect with redux for user and dispatch
+@connect(
+	state => ({
+		user: state.auth.user,
+		isAuthenticated: state.auth.isAuthenticated,
+		token: state.auth.token
+	}),
+	dispatch => ({
+		saveNewQuiz: bindActionCreators(saveNewQuiz, dispatch)
+	})
+)
 export default class Create extends React.Component {
+	static propTypes = {
+		saveNewQuiz: React.PropTypes.func.isRequired
+	}
 	constructor() {
 		super();
 		this.state = {
@@ -26,7 +36,8 @@ export default class Create extends React.Component {
 			quizTitle: '',
 			questionTitle: '',
 			answers: [''],
-			correctAnswer: null
+			correctAnswer: null,
+			submission: false
 		}
 		this.handleKeyPress = this.handleKeyPress.bind(this);
 		this.setQuizTitle = this.setQuizTitle.bind(this);
@@ -45,6 +56,9 @@ export default class Create extends React.Component {
 		this.handleOptionEdit = this.handleOptionEdit.bind(this);
 		this.removeOptionEdit = this.removeOptionEdit.bind(this);
 		this.addEditOption = this.addEditOption.bind(this);
+		this.handleOptionTitleEdit = this.handleOptionTitleEdit.bind(this);
+		this.reviewAddQuestion = this.reviewAddQuestion.bind(this);
+		this.removeQuestion = this.removeQuestion.bind(this);
 		this.saveQuiz = this.saveQuiz.bind(this);
 	}
 	handleKeyPress(key) {
@@ -138,11 +152,13 @@ export default class Create extends React.Component {
 		});
 	}
 	submitTitleEdit() {
-		this.setState({
-			editQuizTitleState: false,
-			quizTitle: this.state.editQuizTitle,
-			editQuizTitle: ''
-		})
+		if (this.state.editQuizTitle !== '') {
+			this.setState({
+				editQuizTitleState: false,
+				quizTitle: this.state.editQuizTitle,
+				editQuizTitle: ''
+			});
+		}
 	}
 	cancelTitleEdit() {
 		this.setState({
@@ -155,11 +171,17 @@ export default class Create extends React.Component {
 		editReview.set(idx, null);
 		const question = quiz.questions[idx];
 		const questionID = 'editQuestion' + idx;
-		const editQuestionTitleID = 'editQuestionTitle' + idx;
 		this.setState({
 			[questionID]: question,
 			editReview,
-			[editQuestionTitleID]: question.questionTitle
+		});
+	}
+	handleOptionTitleEdit(questionIdx, event) {
+		const editQuestionID = 'editQuestion' + questionIdx;
+		const editQuestion = this.state[editQuestionID];
+		editQuestion.questionTitle = event.target.value
+		this.setState({
+			[editQuestionID]: editQuestion
 		});
 	}
 	setCorrectAnswerEdit(questionIdx, answerIdx) {
@@ -175,6 +197,11 @@ export default class Create extends React.Component {
 		const editQuestion = this.state[editQuestionID];
 		if (editQuestion.answers.length > 1) {
 			editQuestion.answers.splice(answerIdx, 1);
+			if (editQuestion.correctAnswer !== answerIdx) {
+				editQuestion.correctAnswer -= 1;
+			} else {
+				editQuestion.correctAnswer = null;
+			}
 			this.setState({
 				[editQuestionID]: editQuestion
 			});
@@ -192,21 +219,58 @@ export default class Create extends React.Component {
 		const editQuestionID = 'editQuestion' + idx;
 		const editQuestion = this.state[editQuestionID];
 		editQuestion.answers.push('');
-		console.log(editQuestion)
 		this.setState({
 			[editQuestionID]: editQuestion
 		});
 	}
-	submitQuestionEdit() {
-
+	submitQuestionEdit(idx) {
+		const editQuestionID = 'editQuestion' + idx;
+		const editedQuestion = this.state[editQuestionID];
+		const { quiz, editReview } = this.state;
+		if (editedQuestion.correctAnswer !== null && editedQuestion.answers.length > 1) {
+			quiz.questions[idx] = editedQuestion;
+			editReview.delete(idx);
+			this.setState({
+				quiz,
+				editReview
+			});
+		}
 	}
 	cancelQuestionEdit(idx) {
 		const { editReview } = this.state;
 		editReview.delete(idx);
 		this.setState({ editReview });
 	}
+	removeQuestion(idx) {
+		const { quiz } = this.state;
+		quiz.questions.splice(idx, 1);
+		this.setState({ quiz });
+	}
+	reviewAddQuestion() {
+		const { quiz, editReview } = this.state;
+		quiz.questions.push({
+			answers: [''],
+			correctAnswer: null,
+			questionTitle: ''
+		});
+		this.setState({ quiz });
+		this.editQuestion(quiz.questions.length - 1);
+	}
 	saveQuiz() {
-		console.log('dispatching quiz saving action here');
+		const { quiz } = this.state;
+		if (quiz.questions.length > 0) {
+			quiz.author = this.props.user;
+			const payload = {
+				user: this.props.user,
+				token: this.props.token,
+				quiz
+			}
+			this.props.saveNewQuiz(payload);
+			this.setState({
+				review: false,
+				submission: true
+			});
+		}
 	}
 	render() {
 		const { correctAnswer, answers } = this.state;
@@ -264,7 +328,7 @@ export default class Create extends React.Component {
 							</button>
 					</div> }
 
-					{ this.state.title && !this.state.review &&
+					{ this.state.title && !this.state.review && !this.state.submission &&
 
 					<div className = 'createQuizContainer'>
 						<h1>Add Questions for Your Quiz:</h1>
@@ -303,6 +367,7 @@ export default class Create extends React.Component {
 					{ this.state.review &&
 
 						<div>
+
 							<h1 className = 'review'>Review Your Quiz</h1>
 							
 							{ !this.state.editQuizTitleState ? 
@@ -323,27 +388,28 @@ export default class Create extends React.Component {
 									type = 'text'
 									name = 'editQuizTitle'
 									value = {this.state.editQuizTitle}
-									onChange = {this.handleInput} /> 
-									<button onClick = {this.submitTitleEdit}className = 'editBtn'>Submit Title Edit</button>
-									<button onClick = {this.cancelTitleEdit}className = 'editBtn'>Cancel Edit</button>
+									onChange = {this.handleInput} />
+									<div className = 'editTitleWrapper'>
+										<button onClick = {this.cancelTitleEdit}className = 'editBtn addOptionEdit'>Cancel Edit</button>
+										<button onClick = {this.submitTitleEdit}className = 'editBtn submitEdit'>Submit Title Edit</button>
+									</div>
 								</div> }
 
 							{this.state.quiz.questions.map( (question, idx) => {
 								const { editReview } = this.state;
 								const { correctAnswer } = question;
 								if (editReview.has(idx)) {
+									const questionID = 'editQuestion' + idx;
 									return (
 										<div key = {idx}>
-											<h2>Editing {question.questionTitle}</h2>
+											<h2>Editing Question {idx + 1}:</h2>
 											<p className = 'inputTitles'>Edit Question Title:</p>
 											<input
 												type = 'text'
-												name = {'editQuestionTitle' + idx}
-												value = {this.state['editQuestionTitle' + idx]}
-												onChange = {this.handleInput} />
+												value = {this.state[questionID].questionTitle}
+												onChange = {this.handleOptionTitleEdit.bind(this, idx)} />
 											<p className = 'inputTitles'>Edit Question Answers:</p>
 											{ question.answers.map( (answer, index) => {
-												const questionID = 'editQuestion' + idx;
 												return (
 													<div className = 'answerContainer' key = {index}>
 
@@ -371,9 +437,11 @@ export default class Create extends React.Component {
 													</div>
 												);
 											})}
-											<button onClick = {this.addEditOption.bind(this, idx)} className = 'editBtn'>Add Another Option</button>
-											<button onClick = {this.submitQuestionEdit.bind(this, idx)} className = 'editBtn'>Submit Edit</button>
-											<button onClick = {this.cancelQuestionEdit.bind(this, idx)} className = 'editBtn'>Cancel Edit</button>
+											<div className = 'editButtonsWrapper'>
+												<button onClick = {this.addEditOption.bind(this, idx)} className = 'editBtn addOptionEdit'>Add Another Option</button>
+												<button onClick = {this.cancelQuestionEdit.bind(this, idx)} className = 'editBtn'>Cancel Edit</button>
+												<button onClick = {this.submitQuestionEdit.bind(this, idx)} className = 'editBtn submitEdit'>Submit Edit</button>
+											</div>
 										</div>
 										)
 								} else {
@@ -384,6 +452,11 @@ export default class Create extends React.Component {
 												<i
 													onClick = {this.editQuestion.bind(this, idx)}
 													className = "fa fa-pencil-square-o fa-editQuestion"
+													aria-hidden = "true">
+												</i>
+												<i
+													onClick = {this.removeQuestion.bind(this, idx)}
+													className = "fa fa-trash fa-editQuestion"
 													aria-hidden = "true">
 												</i>
 												{question.questionTitle}
@@ -408,7 +481,23 @@ export default class Create extends React.Component {
 									);
 								}
 							}) }
-							<button className = 'saveBtn' onClick = {this.saveQuiz}>Save and Submit Your Quiz</button>
+
+							{ this.state.quiz.questions.length === 0 && <h2>You have to enter some questions to submit a new quiz!</h2> }
+
+							<div className = 'reviewBtnControl'>
+								<button className = 'reviewAddBtn' onClick = {this.reviewAddQuestion}>Add Another Question</button>
+								<button className = 'saveBtn' onClick = {this.saveQuiz}>Save and Submit Your Quiz</button>
+							</div>
+
+						</div>
+
+					}
+
+					{ this.state.submission &&
+
+						<div className = 'submissionSuccess'>
+							<h1>Your quiz was submitted successfully!</h1>
+							<h2>Return to the <Link to = 'quiz'>Quizzes Page</Link> to view it and start studying.</h2>
 						</div>
 
 					}
@@ -417,6 +506,7 @@ export default class Create extends React.Component {
 		);
 	}
 	componentDidMount() {
+		if (!this.props.isAuthenticated) { browserHistory.push('/') }
 		window.addEventListener('keydown', this.handleKeyPress);
 	}
 };
