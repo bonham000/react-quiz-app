@@ -51,7 +51,6 @@ export default class Create extends React.Component {
 		this.submitTitleEdit = this.submitTitleEdit.bind(this);
 		this.cancelTitleEdit = this.cancelTitleEdit.bind(this);
 		this.submitQuestionEdit = this.submitQuestionEdit.bind(this);
-		this.cancelQuestionEdit = this.cancelQuestionEdit.bind(this);
 		this.setCorrectAnswerEdit = this.setCorrectAnswerEdit.bind(this);
 		this.handleOptionEdit = this.handleOptionEdit.bind(this);
 		this.removeOptionEdit = this.removeOptionEdit.bind(this);
@@ -197,9 +196,9 @@ export default class Create extends React.Component {
 		const editQuestion = this.state[editQuestionID];
 		if (editQuestion.answers.length > 1) {
 			editQuestion.answers.splice(answerIdx, 1);
-			if (editQuestion.correctAnswer !== answerIdx) {
+			if (editQuestion.correctAnswer > answerIdx) {
 				editQuestion.correctAnswer -= 1;
-			} else {
+			} else if (editQuestion.correctAnswer === answerIdx) {
 				editQuestion.correctAnswer = null;
 			}
 			this.setState({
@@ -235,11 +234,6 @@ export default class Create extends React.Component {
 				editReview
 			});
 		}
-	}
-	cancelQuestionEdit(idx) {
-		const { editReview } = this.state;
-		editReview.delete(idx);
-		this.setState({ editReview });
 	}
 	removeQuestion(idx) {
 		const { quiz } = this.state;
@@ -312,7 +306,7 @@ export default class Create extends React.Component {
 
 					<div>
 						<h1>Create a Quiz</h1>
-						<p className = 'subtitle'>You can create a new quiz here. Add as many questions as you want, you can always edit them later!</p>
+						<p className = 'subtitle'>You can create a new quiz here. Add as many questions as you want, you can always edit them later! However, after submission you cannot edit the quiz.</p>
 						<p className = 'inputTitles'>Enter a Title for Your Quiz:</p>
 						<input
 							type = 'text'
@@ -390,7 +384,7 @@ export default class Create extends React.Component {
 									value = {this.state.editQuizTitle}
 									onChange = {this.handleInput} />
 									<div className = 'editTitleWrapper'>
-										<button onClick = {this.cancelTitleEdit}className = 'editBtn addOptionEdit'>Cancel Edit</button>
+										<button onClick = {this.cancelTitleEdit}className = 'editBtn'>Cancel Edit</button>
 										<button onClick = {this.submitTitleEdit}className = 'editBtn submitEdit'>Submit Title Edit</button>
 									</div>
 								</div> }
@@ -439,7 +433,6 @@ export default class Create extends React.Component {
 											})}
 											<div className = 'editButtonsWrapper'>
 												<button onClick = {this.addEditOption.bind(this, idx)} className = 'editBtn addOptionEdit'>Add Another Option</button>
-												<button onClick = {this.cancelQuestionEdit.bind(this, idx)} className = 'editBtn'>Cancel Edit</button>
 												<button onClick = {this.submitQuestionEdit.bind(this, idx)} className = 'editBtn submitEdit'>Submit Edit</button>
 											</div>
 										</div>
@@ -482,7 +475,7 @@ export default class Create extends React.Component {
 								}
 							}) }
 
-							{ this.state.quiz.questions.length === 0 && <h2>You have to enter some questions to submit a new quiz!</h2> }
+							{ this.state.quiz.questions.length === 0 && <h2 className = 'errorMsg'>You have to enter some questions to submit a new quiz!</h2> }
 
 							<div className = 'reviewBtnControl'>
 								<button className = 'reviewAddBtn' onClick = {this.reviewAddQuestion}>Add Another Question</button>

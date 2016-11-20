@@ -31,8 +31,6 @@ export default class Navbar extends Component {
           { isAuthenticated &&
             <Link to = 'create' className = 'navLink' activeClassName = 'activeLink'>Create</Link> }
           { isAuthenticated &&
-          <Link to = 'my-quizzes' className = 'navLink' activeClassName = 'activeLink'>My Quizzes</Link> }
-          { isAuthenticated &&
             <Link to = 'leaderboard' className = 'navLink' activeClassName = 'activeLink'>Leaderboard</Link> }
           { isAuthenticated &&
             <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }    

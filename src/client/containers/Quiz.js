@@ -21,9 +21,10 @@ export default class Quiz extends React.Component {
 		super();
 		this.state = {
 			session: false,
-			selectedQuiz: null,
+			selectedQuiz: '',
+			selectedQuizTitle: '',
 			quiz: [],
-			length: 15
+			length: null
 		}
 		this.selectQuiz = this.selectQuiz.bind(this);
 		this.startStudy = this.startStudy.bind(this);
@@ -32,24 +33,29 @@ export default class Quiz extends React.Component {
 	componentDidMount() {
 		const { quizzes } = this.props;
 		for (let i = 0; i < quizzes.length; i++) {
-			if (quizzes[i]['title'] === 'Math quiz') {
+			if (quizzes[i]['title'] === 'React/Redux Quiz') {
 				this.setState({
-					selectedQuiz: quizzes[i].id
+					selectedQuiz: quizzes[i].id,
+					selectedQuizTitle: quizzes[i].title,
+					length: quizzes[i].questions.length
 				});
 			}
 		}
 	}
 	selectQuiz(event) {
-		const quizID = event.target.value
+		const quizID = event.target.value;
 		const { quizzes } = this.props;
 		let { length } = this.state;
+		let title = '';
 		for (let i = 0; i < quizzes.length; i++) {
-			if (quizzes[i]['id'] === quizID) {
+			if (quizzes[i].id === quizID) {
 				length = quizzes[i].questions.length;
+				title = quizzes[i].title;
 			}
 		}
 		this.setState({
 			selectedQuiz: quizID,
+			selectedQuizTitle: title,
 			length
 		});
 	}
@@ -65,6 +71,7 @@ export default class Quiz extends React.Component {
 			const scoreData = {
 				user,
 				score,
+				quiz: this.state.selectedQuizTitle,
 				id: this.state.selectedQuiz
 			}
 			this.props.submitScore(scoreData);
@@ -82,11 +89,11 @@ export default class Quiz extends React.Component {
 				<div className = 'studyComponent'>
 					<h1>Select a Quiz to Study</h1>
 					<p>All the quizzes uploaded by users are available here:</p>
-					<select onChange = {this.selectQuiz.bind(this)}>
+					<select onChange = {this.selectQuiz.bind(this)} value = {this.state.selectedQuiz}>
 						{this.props.quizzes.map( (quiz, idx) => {
 							return (
 								<option
-									value = {quiz.title}
+									value = {quiz.id}
 									key = {idx} >
 									{quiz.title}
 								</option>

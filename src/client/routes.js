@@ -5,7 +5,6 @@ import App from './containers/App'
 import About from './components/About'
 import Quiz from './containers/Quiz'
 import Create from './containers/Create'
-import MyQuizzes from './containers/MyQuizzes'
 import Leaderboard from './components/Leaderboard'
 import PassportAuth from './containers/PassportAuth'
 
@@ -14,7 +13,6 @@ export default (
   	<Route path = '/' name = 'about' component = {About} />
   	<Route path = 'quiz' name = 'quiz' component = {Quiz} />
   	<Route path = 'create' name = 'create' component = {Create} />
-  	<Route path = 'my-quizzes' name = 'my-quizzes' component = {MyQuizzes} />
   	<Route path = 'leaderboard' name = 'leaderboard' component = {Leaderboard} />
   	<Route path = 'account' name = 'account' component = {PassportAuth} />
   </Route>

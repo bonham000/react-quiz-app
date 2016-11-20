@@ -53,7 +53,7 @@ export default class Study extends React.Component {
 											key = {idx}
 											className = 'answerContainer'
 											onClick = {this.correctAnswer}>
-											<h2>{answer}</h2>
+											<p>{answer}</p>
 										</div>	
 									)
 								} else {
@@ -62,7 +62,7 @@ export default class Study extends React.Component {
 											key = {idx}
 											className = 'answerContainer'
 											onClick = {this.wrongAnswer}>
-											<h2>{answer}</h2>
+											<p>{answer}</p>
 										</div>
 									)
 								}
@@ -72,7 +72,7 @@ export default class Study extends React.Component {
 										<div
 											key = {idx}
 											className = 'answerContainer' id = 'correctWinner'>
-											<h2>{answer}</h2>
+											<p>{answer}</p>
 										</div>	
 									)
 								} else {
@@ -80,7 +80,7 @@ export default class Study extends React.Component {
 										<div
 											key = {idx}
 											className = 'answerContainer' id = 'wrongWinner'>
-											<h2>{answer}</h2>
+											<p>{answer}</p>
 										</div>
 									)
 								}
@@ -90,7 +90,7 @@ export default class Study extends React.Component {
 										<div
 											key = {idx}
 											className = 'answerContainer' id = 'correctLoser'>
-											<h2>{answer}</h2>
+											<p>{answer}</p>
 										</div>	
 									)
 								} else {
@@ -98,7 +98,7 @@ export default class Study extends React.Component {
 										<div
 											key = {idx}
 											className = 'answerContainer' id = 'wrongLoser'>
-											<h2>{answer}</h2>
+											<p>{answer}</p>
 										</div>
 									)
 								}				

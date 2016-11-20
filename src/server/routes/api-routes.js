@@ -42,12 +42,13 @@ app.post('/save-quiz', (req, res) => {
 });
 
 app.post('/submit-score', (req, res) => {
-	const { user, score, id } = req.body;
+	const { user, score, id, quiz } = req.body;
 	Leaderboard.findOne({ id: id }, (err, leaderboard) => {
 		if (err) throw err;
 		if (!leaderboard) {
 			leaderboard = new Leaderboard({
 				id,
+				quiz,
 				leaders: [
 					{
 						user,
