@@ -26,25 +26,15 @@ body {
 	text-align: center;
 	h1 {
 		font-size: 36px;
-		width: 65vw;
+		width: 600px;
 		margin: 35px auto 0 auto;
 		padding-bottom: 15px;
 		border-bottom: 3px solid $blue;
 	}
-	h2 {
-		font-size: 32px;
-		margin: 25px auto;
-	}
 	p {
-		width: 50vw;
+		width: 750px;
 		margin: auto;
 		font-size: 26px;
-	}
-	h3 {
-		width: 65vw;
-		font-size: 28px;
-		margin-left: auto;
-		margin-right: auto;
 	}
 	.description {
 		margin-top: 15px;
@@ -294,6 +284,29 @@ body {
 	}
 }
 
+.studyComponent {
+	width: 550px;
+	margin: auto;
+	h1 {
+		margin: 25px auto;
+	}
+	select {
+		width: 500px;
+		margin: 5px auto;
+	}
+	.studyBtn {
+		width: 350px;
+		margin: 25px auto;
+		padding: 4px;
+		font-size: 30px;
+		border: 1px solid black;
+		background: $blue;
+	}
+	.studyBtn:hover {
+		background: #05D7FF;
+	}
+}
+
 @media only screen and (max-width: 650px) {
 	.navigationWrapper {
 		padding-top: 5px;
@@ -327,22 +340,13 @@ body {
 	.aboutWrapper {
 		h1 {
 			width: 85vw;
-			font-size: 28px;
-			margin-top: 15px;
-		}
-		h2 {
-			font-size: 22px;
-			width: 80vw;
-		}
-		h3 {
-			font-size: 20px;
-			width: 90vw;
+			font-size: 24px;
+			margin-top: 25px;
+			padding-bottom: 25px;
 		}
 		p {
-			font-size: 16px;
-			width: 85vw;
-		}
-		.credits {
+			margin-top: 25px;
+			font-size: 18px;
 			width: 85vw;
 		}
 	}
@@ -433,6 +437,25 @@ body {
 		}
 		h2 {
 			font-size: 24px;
+		}
+	}
+	.studyComponent {
+		width: 95vw;
+		margin: 12px auto;
+		h1 {
+			width: 90vw;
+			margin: 20px auto;
+			font-size: 28px;
+		}
+		select {
+			width: 90vw;
+			margin: 12px auto;
+			font-size: 22px;
+		}
+		.studyBtn {
+			width: 75vw;
+			margin: 12px auto;
+			font-size: 22px;
 		}
 	}
 }

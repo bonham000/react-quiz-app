@@ -10,8 +10,8 @@ import { connect } from 'react-redux'
 export default class Quiz extends React.Component {
 	render() {
 		return (
-			<div>
-				<h1>Quiz Component</h1>
+			<div className = 'studyComponent'>
+				<h1>Select a Quiz to Study</h1>
 				<select>
 					{this.props.quizzes.map( (quiz, idx) => {
 						return (
@@ -19,6 +19,7 @@ export default class Quiz extends React.Component {
 						);
 					}) }
 				</select>
+				<button className = 'studyBtn'>Begin Quiz</button>
 			</div>
 		);
 	}
