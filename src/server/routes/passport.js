@@ -15,7 +15,7 @@ function createToken(username) { return jwt.sign({user: username}, secret, { exp
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.GITHUB_CALLBACK_DEV
+    callbackURL: process.env.GITHUB_CALLBACK_PROD
   },
   function(accessToken, refreshToken, profile, done) {
     // search for user in database base

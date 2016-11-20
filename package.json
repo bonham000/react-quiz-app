@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-auth-starter-kit",
+  "name": "react-redux-quiz-app",
   "version": "1.0.1",
-  "description": "User Authentication with a single-page React/Redux App",
+  "description": "A Quiz App for Learning",
   "main": "dist/server/index.js",
   "scripts": {
     "lint:server": "eslint src/server",
@@ -16,7 +16,7 @@
     "build:client": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "build:server": "babel src/server -d dist/server",
     "build": "npm-run-all build:*",
-    "start": "node dist/server/index.js"
+    "start": "./node_modules/.bin/babel-node dist/server/index.js"
   },
   "author": "Sean Smith",
   "license": "MIT",
@@ -57,6 +57,8 @@
   "dependencies": {
     "assert": "^1.4.1",
     "axios": "^0.15.2",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
     "bcrypt": "^0.8.7",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",

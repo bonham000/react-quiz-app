@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 
 import { DEV_HOST, PROD_HOST } from '../constants/host'
 
-const HOST = DEV_HOST;
+const HOST = PROD_HOST;
 
 export const LOGIN_REQUEST  = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS  = 'LOGIN_SUCCESS'
