@@ -58,3 +58,13 @@ export const getLeaders = () => {
 	}
 }
 
+export const updateQuiz = (data) => {
+	return dispatch => {
+		axios.post('/update-quiz', data).then( (response) => {
+			console.log(response);
+		}).catch(err => console.log(err));
+	}
+}
+
+
+

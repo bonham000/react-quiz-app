@@ -9,7 +9,7 @@ const quiz = (state = [], action) => {
 			return state.concat(action.quiz);
 
 		case SAVE_QUIZZES:
-			return [...state, ...action.data];
+			return [...action.data];
 
 		default:
 			return state;

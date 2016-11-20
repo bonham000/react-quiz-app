@@ -31,9 +31,11 @@ export default class Navbar extends Component {
           { isAuthenticated &&
             <Link to = 'create' className = 'navLink' activeClassName = 'activeLink'>Create</Link> }
           { isAuthenticated &&
-            <Link to = 'leaderboard' className = 'navLink' activeClassName = 'activeLink'>Leaderboard</Link> }            
+          <Link to = 'my-quizzes' className = 'navLink' activeClassName = 'activeLink'>My Quizzes</Link> }
           { isAuthenticated &&
-            <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }             
+            <Link to = 'leaderboard' className = 'navLink' activeClassName = 'activeLink'>Leaderboard</Link> }
+          { isAuthenticated &&
+            <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }    
           { !isAuthenticated &&
             <a className = "btn btn-block btn-social btn-github" id = 'githubAuth' href = "/auth/github">
               <span className = "fa fa-github"></span> Login with GitHub
