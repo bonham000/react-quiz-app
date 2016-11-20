@@ -21,7 +21,7 @@ export default class Quiz extends React.Component {
 		super();
 		this.state = {
 			session: false,
-			selectedQuiz: 'Math Quiz',
+			selectedQuiz: null,
 			quiz: [],
 			length: 15
 		}
@@ -29,23 +29,33 @@ export default class Quiz extends React.Component {
 		this.startStudy = this.startStudy.bind(this);
 		this.endStudy = this.endStudy.bind(this);
 	}
+	componentDidMount() {
+		const { quizzes } = this.props;
+		for (let i = 0; i < quizzes.length; i++) {
+			if (quizzes[i]['title'] === 'Math quiz') {
+				this.setState({
+					selectedQuiz: quizzes[i].id
+				});
+			}
+		}
+	}
 	selectQuiz(event) {
-		const quizName = event.target.value
+		const quizID = event.target.value
 		const { quizzes } = this.props;
 		let { length } = this.state;
 		for (let i = 0; i < quizzes.length; i++) {
-			if (quizzes[i]['title'] === quizName) {
+			if (quizzes[i]['id'] === quizID) {
 				length = quizzes[i].questions.length;
 			}
 		}
 		this.setState({
-			selectedQuiz: quizName,
+			selectedQuiz: quizID,
 			length
 		});
 	}
 	startStudy() {
 		const { selectedQuiz } = this.state;
-		const quiz = this.props.quizzes.filter( (quiz) => quiz.title === selectedQuiz );
+		const quiz = this.props.quizzes.filter( (quiz) => quiz.id === selectedQuiz );
 		this.setState({ quiz: quiz[0], session: true });
 	}
 	endStudy(score) {
@@ -55,7 +65,7 @@ export default class Quiz extends React.Component {
 			const scoreData = {
 				user,
 				score,
-				quiz: this.state.selectedQuiz
+				id: this.state.selectedQuiz
 			}
 			this.props.submitScore(scoreData);
 		}

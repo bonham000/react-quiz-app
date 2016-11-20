@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken'
 import secret from '../jwt-config'
+import uuid from 'uuid-v4'
 import dotenv from 'dotenv'
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.post('/save-quiz', (req, res) => {
 			const quiz = new Quiz({
 				author: user,
 				title: quizData.title,
+				id: uuid(),
 				questions: quizData.questions
 			});
 			quiz.save( (err) => {
@@ -40,12 +42,12 @@ app.post('/save-quiz', (req, res) => {
 });
 
 app.post('/submit-score', (req, res) => {
-	const { user, score, quiz } = req.body;
-	Leaderboard.findOne({ quiz: quiz }, (err, leaderboard) => {
+	const { user, score, id } = req.body;
+	Leaderboard.findOne({ id: id }, (err, leaderboard) => {
 		if (err) throw err;
 		if (!leaderboard) {
 			leaderboard = new Leaderboard({
-				quiz,
+				id,
 				leaders: [
 					{
 						user,
