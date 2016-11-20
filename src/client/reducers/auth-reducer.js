@@ -6,7 +6,7 @@ const defaultState = {
   loginError: '',
   isFetching: false,
   isAuthenticated: false,
-  user: '',
+  user: 'Tiny',
   token: ''
 }
 

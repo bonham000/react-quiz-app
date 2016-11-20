@@ -39,6 +39,10 @@ app.post('/save-quiz', (req, res) => {
 	});
 });
 
+const getLeaderboard = () => {
+
+}
+
 app.post('/submit-score', (req, res) => {
 	const { user, score, quiz } = req.body;
 	Leaderboard.findOne({ quiz: quiz }, (err, leaderboard) => {
@@ -61,10 +65,11 @@ app.post('/submit-score', (req, res) => {
 			// if board exists, verify that user has not already submitted a score
 			const checkLeaders = leaderboard.leaders.filter( (leader) => leader.user === user );
 			if (checkLeaders.length === 0) {
-				leaderboard.leaders.concat({
+				leaderboard.leaders.push({
 					user,
 					score
 				});
+				console.log(leaderboard);
 				leaderboard.save( (err) => {
 					if (err) throw err;
 					res.status(201).send('score saved!');
@@ -75,7 +80,6 @@ app.post('/submit-score', (req, res) => {
 		}
 	});
 });
-
 
 app.get('/get-leaders', (req, res) => {
 	Leaderboard.find({}, (err, data) => {

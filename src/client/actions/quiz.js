@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-import { ADD_QUIZ, SAVE_QUIZZES, CREATE_LEADERBOARD } from '../constants/quiz'
+import { ADD_QUIZ, SAVE_QUIZZES, UPDATE_LEADERBOARD } from '../constants/quiz'
 
 const addQuizLocal = (quiz) => {
 	return {
@@ -37,14 +37,14 @@ export const getQuizzes = () => {
 export const submitScore = (data) => {
 	return dispatch => {
 		axios.post('/submit-score', data).then( (response) => {
-			console.log(response);
+		dispatch(getLeaders());
 		}).catch(err => console.log(err));
 	}
 }
 
-const createLeaderboard = (data) => {
+const updateLeaderboard = (data) => {
 	return {
-		type: CREATE_LEADERBOARD,
+		type: UPDATE_LEADERBOARD,
 		data
 	}
 }
@@ -53,7 +53,7 @@ export const getLeaders = () => {
 	return dispatch => {
 		axios.get('/get-leaders').then( (response) => {
 			const data = response.data;
-			dispatch(createLeaderboard(data));
+			dispatch(updateLeaderboard(data));
 		}).catch(err => console.log(err));
 	}
 }

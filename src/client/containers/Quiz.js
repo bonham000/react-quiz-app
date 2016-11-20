@@ -41,7 +41,7 @@ export default class Quiz extends React.Component {
 	}
 	endStudy(score) {
 		this.setState({ session: false });
-		if (this.props.isAuthenticated) {
+		//if (this.props.isAuthenticated) {
 			const { user } = this.props;
 			const scoreData = {
 				user,
@@ -49,7 +49,7 @@ export default class Quiz extends React.Component {
 				quiz: this.state.selectedQuiz
 			}
 			this.props.submitScore(scoreData);
-		}
+		//}
 	}
 	render() {
 		if (this.state.session) {
