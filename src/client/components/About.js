@@ -30,7 +30,7 @@ class About extends React.Component {
 
 				{ this.props.isAuthenticated &&
 					<div className = 'description'>
-						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! Go ahead and <Link to = 'quiz'>take the Quiz</Link> about React, or you can also use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
+						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! Feel free to go ahead and <Link to = 'quiz'>take the Quiz</Link> to test your React skills, or you can just use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
 					</div> }
 
 					<div className = 'logos'>

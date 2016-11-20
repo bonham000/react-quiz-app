@@ -25,22 +25,19 @@ export default class Navbar extends Component {
       <div className = "navigationWrapper">
         <div className = "linksWrapper">
 
-            <Link to = '/' className = 'navLink' activeClassName = 'activeRoute'>Home</Link>
-            <Link to = 'quiz' className = 'navLink' activeClassName = 'activeRoute'>Quiz</Link>
+          <Link to = '/' className = 'navLink' activeClassName = 'activeLink'>Home</Link>
+          <Link to = 'quiz' className = 'navLink' activeClassName = 'activeLink'>Quiz</Link>
 
+          { isAuthenticated &&
+            <Link to = 'create' className = 'navLink' activeClassName = 'activeLink'>Create</Link> }
+          { isAuthenticated &&
+            <Link to = 'leaderboard' className = 'navLink' activeClassName = 'activeLink'>Leaderboard</Link> }            
+          { isAuthenticated &&
+            <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }             
           { !isAuthenticated &&
             <a className = "btn btn-block btn-social btn-github" id = 'githubAuth' href = "/auth/github">
               <span className = "fa fa-github"></span> Sign in with GitHub
             </a> }
-
-          { isAuthenticated &&
-            <Link to = 'create' className = 'navLink' activeClassName = 'activeRoute'>Create</Link> }
-
-          { isAuthenticated &&
-            <Link to = 'leaderboard' className = 'navLink' activeClassName = 'activeRoute'>Leaderboard</Link> }            
-
-          { isAuthenticated &&
-            <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }             
 
         </div>
       </div>

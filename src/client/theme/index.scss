@@ -31,6 +31,7 @@ body {
 		margin: 35px auto 0 auto;
 		padding: 15px;
 		border-bottom: 3px solid $blue;
+		font-family: 'Cabin', serif;
 	}
 	p {
 		max-width: 900px;
@@ -38,6 +39,7 @@ body {
 		padding-right: 15px;
 		margin: auto;
 		font-size: 26px;
+		font-family: 'Cabin', serif;
 	}
 	.description {
 		margin-top: 15px;
@@ -68,11 +70,11 @@ body {
 		margin: auto;
 	  a, a:visited {
 	  	text-decoration: none;
-	  	color: white;
 	  }
 	  .navLink {
 	  	margin: 5px 12px;
 	  	float: left;
+	  	color: white;
 	  }
 	  #githubAuth {
 	  	width: 200px;
@@ -89,6 +91,9 @@ body {
 	  	}
 	  }
 	  .navLink:hover {
+	  	color: black !important;
+	  }
+	  .activeLink {
 	  	color: black !important;
 	  }
 	}
@@ -590,6 +595,11 @@ body {
 			width: 90vw;
 			margin: 20px auto;
 			font-size: 28px;
+		}
+		p {
+			width: 65vw;
+			margin: 5px auto;
+			font-size: 22px;
 		}
 		select {
 			width: 90vw;

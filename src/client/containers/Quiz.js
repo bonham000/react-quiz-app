@@ -57,6 +57,7 @@ export default class Quiz extends React.Component {
 			return (
 				<div className = 'studyComponent'>
 					<h1>Select a Quiz to Study</h1>
+					<p>All the quizzes uploaded by users are available here:</p>
 					<select onChange = {this.selectQuiz.bind(this)}>
 						{this.props.quizzes.map( (quiz, idx) => {
 							return (

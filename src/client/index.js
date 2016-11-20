@@ -1,4 +1,3 @@
-/* eslint-disable import/default */
 import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
@@ -13,11 +12,9 @@ import './theme/index.scss'
 
 export const store = configureStore();
 
-//console.log(store.getState());
-
 render(
-  <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
+  <Provider store = {store}>
+    <Router history = {browserHistory} routes = {routes} />
   </Provider>,
   document.getElementById('app')
 );
