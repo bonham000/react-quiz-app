@@ -2,6 +2,7 @@ $orange: #FF4A1F;
 $pink: #FE0253;
 $error: #E71A3A;
 $blue: #06C1FF;
+$blueHover: #05D7FF;
 $mint: #1AF59D;
 
 body {
@@ -304,8 +305,92 @@ body {
 	}
 	.studyBtn:hover {
 		background: #05D7FF;
+		cursor: pointer;
 	}
 }
+.studyWrapper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	background: rgb(25,25,25);
+	color: white;
+	overflow: scroll;
+	.studyContainer {
+		padding-top: 15px;
+		padding-bottom: 50px;
+		font-family: 'Cabin', serif;
+		.quizTitle {
+			font-size: 50px;
+			width: 700px;
+			border-bottom: 1px solid rgba(250,250,250,0.25);
+			padding-bottom: 15px;
+			margin: 35px auto;
+		}
+		.quizLength {
+			font-size: 20px;
+			color: rgb(175,175,175);
+		}
+		.questionTitle {
+			font-size: 30px;
+			width: 650px;
+			margin: 25px auto;
+		}
+		.answerContainer {
+			width: 650px;
+			font-size: 24px;
+			margin: 12px auto;
+			padding-bottom: 5px;
+			text-align: left;
+			border: 1px solid rgba(250,250,250,0.20);
+			h2 {
+				padding-left: 15px;
+			}
+		}
+		.answerContainer:hover {
+			border: 1px solid $blue;
+			cursor: pointer;
+		}
+		#correctWinner {
+			background: $blueHover;
+			border: 1px solid $blueHover;
+			color: black;
+		}
+		#wrongWinner {
+			border: 1px solid $blueHover;
+		}
+		#correctLoser {
+			background: $blueHover;
+			border: 1px solid black;
+			color: black;
+		}
+		#wrongLoser {
+			background: $error;
+			border: 1px solid black;
+			color: black;
+		}
+		.correctAnswer {
+			color: $mint;
+		}
+		.wrongAnswer {
+			color: $error;
+		}
+		button {
+			border: none;
+			background: white;
+			color: black;
+			padding: 2px 4px;
+			width: 250px;
+			margin: 15px;
+		}
+		button:hover {
+			background: $mint;
+		}
+	}
+}
+
 
 @media only screen and (max-width: 650px) {
 	.navigationWrapper {
