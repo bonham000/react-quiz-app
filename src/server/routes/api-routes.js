@@ -1,4 +1,5 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken'
 import secret from '../jwt-config'
@@ -9,12 +10,14 @@ import Quiz from '../models/quiz'
 
 const app = module.exports = express.Router();
 
+// retrieve all quizzes from database and return to client upon request
 app.get('/get-quizzes', (req, res) => {
-
-	// connect to database, retrieve all quizzes, and return array to client
-
+	Quiz.find({}, (err, data) => {
+		res.status(201).send(data);
+	});
 });
 
+// post a new quiz from client to database
 app.post('/save-quiz', (req, res) => {
 
 	const { quiz: quizData, user, token } = req.body;
