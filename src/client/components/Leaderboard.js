@@ -17,7 +17,7 @@ export default class Leaderboard extends React.Component {
 					{board.leaders.sort( (a,b) => b.score - a.score ).map( (leader, idx) => {
 						return (
 							<div key = {idx} className = 'leadersWrapper'>
-								<p>{leader.user}<span>{leader.score}</span></p>
+								<p>{leader.user}<span>{leader.score}%</span></p>
 							</div>
 						)
 					}) }
@@ -27,6 +27,7 @@ export default class Leaderboard extends React.Component {
 		return (
 			<div className = 'leaderboardComponent'>
 				<h1 className = 'title'>Leaderboard</h1>
+				<p className = 'note'>Note: Only the score from your first attempt on a quiz will be recorded here.</p>
 				{mapLeaders}
 			</div>
 		);

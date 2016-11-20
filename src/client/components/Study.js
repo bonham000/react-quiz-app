@@ -108,13 +108,16 @@ export default class Study extends React.Component {
 					{ this.state.answer !== null && !this.state.complete &&
 						<div className = 'messageDiv'>
 							{ this.state.answer ? <h1 className = 'correctAnswer'>Correct, nice job!</h1> : <h1 className = 'wrongAnswer'>Sorry, that's not correct!</h1> }
-							<button onClick = {this.nextQuestion}>Next Question</button>
+							{ this.state.index + 1 === quiz.questions.length ?
+								<button onClick = {this.nextQuestion}>View Results</button>
+								:
+								<button onClick = {this.nextQuestion}>Next Question</button> }
 						</div> }
 
 					{ this.state.complete &&
 						<div>
-							<h1 className = 'scoreMessage'>You scored {this.state.score} correct out of {this.props.quiz.questions.length} questions! { percentage > 0.75 ? 'Not bad!' : 'Better luck next time!'}</h1>
-							<button className = 'finishBtn' onClick = {this.props.endStudy.bind(this, this.state.score)}>Return to Quiz Page</button>
+							<h1 className = 'scoreMessage'>You scored {this.state.score} correct out of {this.props.quiz.questions.length} questions! { percentage > 0.75 ? 'Nice work!' : 'Better luck next time!'}</h1>
+							<button className = 'finishBtn' onClick = {this.props.endStudy.bind(this, this.state.score / this.props.quiz.questions.length * 100 )}>Return to Quiz Page</button>
 						</div> }
 
 				</div>

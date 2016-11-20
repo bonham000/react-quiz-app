@@ -234,6 +234,12 @@ body {
 		padding-bottom: 15px;
 		margin: 12px auto;
 	}
+	.quizTitleReview {
+		width: 550px;
+		text-align: left;
+		margin: 15px auto;
+		padding-left: 12px;
+	}
 	.questionTitleReview {
 		width: 550px;
 		margin: 12px auto;
@@ -304,6 +310,10 @@ body {
 	margin: auto;
 	h1 {
 		margin: 25px auto;
+		font-family: 'Cabin', serif;
+	}
+	p {
+		font-family: 'Cabin', serif;
 	}
 	select {
 		width: 500px;
@@ -312,7 +322,7 @@ body {
 	}
 	.studyBtn {
 		width: 350px;
-		margin: 25px auto;
+		margin: 15px auto;
 		padding: 4px;
 		font-size: 30px;
 		border: 1px solid black;
@@ -321,6 +331,12 @@ body {
 	.studyBtn:hover {
 		background: #05D7FF;
 		cursor: pointer;
+	}
+	.quizInfo {
+		width: 500px;
+		font-size: 22px;
+		margin: 15px auto;
+		font-family: 'Cabin', serif;
 	}
 }
 .studyWrapper {
@@ -414,6 +430,13 @@ body {
 		width: 650px;
 		margin: 15px auto;
 		color: black;
+		text-align: center;
+	}
+	.note {
+		width: 600px;
+		margin: 5px auto;
+		color: black;
+		font-size: 18px;
 		text-align: center;
 	}
 	.quizWrapper {
@@ -612,6 +635,11 @@ body {
 			margin: 12px auto;
 			font-size: 22px;
 		}
+		.quizInfo {
+			width: 85vw;
+			font-size: 18px;
+			margin: 12px auto;
+		}
 	}
 	.studyWrapper {
 		.studyContainer {
@@ -665,6 +693,11 @@ body {
 		.title {
 			width: 80vw;
 			margin: 12px auto;
+		}
+		.note {
+			width: 90vw;
+			margin: 12px auto 20px auto;
+			font-size: 16px;
 		}
 		.quizWrapper {
 			width: 90vw;

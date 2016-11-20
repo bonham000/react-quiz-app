@@ -22,13 +22,27 @@ export default class Quiz extends React.Component {
 		this.state = {
 			session: false,
 			selectedQuiz: 'Math Quiz',
-			quiz: []
+			quiz: [],
+			length: 15
 		}
 		this.selectQuiz = this.selectQuiz.bind(this);
 		this.startStudy = this.startStudy.bind(this);
 		this.endStudy = this.endStudy.bind(this);
 	}
-	selectQuiz(event) { this.setState({ selectedQuiz: event.target.value }) }
+	selectQuiz(event) {
+		const quizName = event.target.value
+		const { quizzes } = this.props;
+		let { length } = this.state;
+		for (let i = 0; i < quizzes.length; i++) {
+			if (quizzes[i]['title'] === quizName) {
+				length = quizzes[i].questions.length;
+			}
+		}
+		this.setState({
+			selectedQuiz: quizName,
+			length
+		});
+	}
 	startStudy() {
 		const { selectedQuiz } = this.state;
 		const quiz = this.props.quizzes.filter( (quiz) => quiz.title === selectedQuiz );
@@ -36,7 +50,7 @@ export default class Quiz extends React.Component {
 	}
 	endStudy(score) {
 		this.setState({ session: false });
-		//if (this.props.isAuthenticated) {
+		if (this.props.isAuthenticated) {
 			const { user } = this.props;
 			const scoreData = {
 				user,
@@ -44,7 +58,7 @@ export default class Quiz extends React.Component {
 				quiz: this.state.selectedQuiz
 			}
 			this.props.submitScore(scoreData);
-		//}
+		}
 	}
 	render() {
 		if (this.state.session) {
@@ -69,6 +83,8 @@ export default class Quiz extends React.Component {
 							);
 						}) }
 					</select>
+					{this.state.length !== null &&
+						<p className = 'quizInfo'>This quiz has a total of {this.state.length} questions</p> }
 					<button className = 'studyBtn' onClick = {this.startStudy}>Begin Quiz</button>
 				</div>
 			);

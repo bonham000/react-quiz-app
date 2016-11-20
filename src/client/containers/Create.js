@@ -312,7 +312,7 @@ export default class Create extends React.Component {
 
 					<div>
 						<h1>Create a Quiz</h1>
-						<p className = 'subtitle'>You can create a new quiz here. Add as many options as you want, you can always edit them later!</p>
+						<p className = 'subtitle'>You can create a new quiz here. Add as many questions as you want, you can always edit them later!</p>
 						<p className = 'inputTitles'>Enter a Title for Your Quiz:</p>
 						<input
 							type = 'text'

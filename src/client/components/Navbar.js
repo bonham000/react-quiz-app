@@ -36,7 +36,7 @@ export default class Navbar extends Component {
             <Link to = '#' className = 'navLink' onClick = { () => this.props.logoutUser() }>Logout</Link> }             
           { !isAuthenticated &&
             <a className = "btn btn-block btn-social btn-github" id = 'githubAuth' href = "/auth/github">
-              <span className = "fa fa-github"></span> Sign in with GitHub
+              <span className = "fa fa-github"></span> Login with GitHub
             </a> }
 
         </div>
