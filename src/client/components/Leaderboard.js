@@ -12,12 +12,12 @@ export default class Leaderboard extends React.Component {
 		const { leaders } = this.props
 		const mapLeaders = leaders.map( (board, index) => {
 			return (
-				<div key = {index}>
-					<h1>Quiz: {board.quiz}</h1>
+				<div key = {index} className = 'quizWrapper'>
+					<h3>{board.quiz}</h3>
 					{board.leaders.sort( (a,b) => b.score - a.score ).map( (leader, idx) => {
 						return (
-							<div key = {idx}>
-								<h1>User: {leader.user} | Score: {leader.score}</h1>
+							<div key = {idx} className = 'leadersWrapper'>
+								<p>{leader.user}<span>{leader.score}</span></p>
 							</div>
 						)
 					}) }
@@ -25,8 +25,8 @@ export default class Leaderboard extends React.Component {
 			);
 		})
 		return (
-			<div>
-				<h1>Leaderboard</h1>
+			<div className = 'leaderboardComponent'>
+				<h1 className = 'title'>Leaderboard</h1>
 				{mapLeaders}
 			</div>
 		);

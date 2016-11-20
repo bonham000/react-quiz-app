@@ -28,12 +28,7 @@ export default class Quiz extends React.Component {
 		this.startStudy = this.startStudy.bind(this);
 		this.endStudy = this.endStudy.bind(this);
 	}
-	selectQuiz(event) {
-		console.log(event.target.value)
-		this.setState({
-			selectedQuiz: event.target.value
-		})
-	}
+	selectQuiz(event) { this.setState({ selectedQuiz: event.target.value }) }
 	startStudy() {
 		const { selectedQuiz } = this.state;
 		const quiz = this.props.quizzes.filter( (quiz) => quiz.title === selectedQuiz );

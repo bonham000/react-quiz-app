@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { browserHistory, Link } from 'react-router'
 
+import reactLogo from '../data/react.png'
+import reduxLogo from '../data/redux.png'
+
 @connect(
 	state => ({
 		isAuthenticated: state.auth.isAuthenticated,
@@ -29,6 +32,11 @@ class About extends React.Component {
 					<div className = 'description'>
 						<p>This app will help you learn React and Redux, awesome new cutting edge web technologies! Go ahead and <Link to = 'quiz'>take the Quiz</Link> about React, or you can also use this app to <Link to = 'create'>create your own quizzes</Link> on any topic!</p>
 					</div> }
+
+					<div className = 'logos'>
+						<img src = {reactLogo} alt = "React Logo"/>
+						<img src = {reduxLogo} alt = "Redux Logo"/>
+					</div>
 
 		  </div>
 	  );

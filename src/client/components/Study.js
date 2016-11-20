@@ -114,7 +114,7 @@ export default class Study extends React.Component {
 					{ this.state.complete &&
 						<div>
 							<h1 className = 'scoreMessage'>You scored {this.state.score} correct out of {this.props.quiz.questions.length} questions! { percentage > 0.75 ? 'Not bad!' : 'Better luck next time!'}</h1>
-							<button onClick = {this.props.endStudy.bind(this, this.state.score)}>Finish Study</button>
+							<button className = 'finishBtn' onClick = {this.props.endStudy.bind(this, this.state.score)}>Return to Quiz Page</button>
 						</div> }
 
 				</div>

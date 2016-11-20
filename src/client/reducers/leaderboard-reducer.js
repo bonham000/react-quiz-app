@@ -6,7 +6,7 @@ const leaderboard = (state = [], action) => {
 	switch(action.type) {
 
 		case UPDATE_LEADERBOARD:
-			return [...action.data];
+			return [...state, ...action.data];
 
 		default:
 			return state;
