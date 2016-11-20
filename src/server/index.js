@@ -11,7 +11,7 @@ import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import mongoose from 'mongoose'
-dotenv.config();
+dotenv.config({silent: true});
 
 const url = process.env.MONGO_HOST;
 const secretString = process.env.SECRET_STRING;

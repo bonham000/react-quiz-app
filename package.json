@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "A Quiz App for Learning",
   "main": "dist/server/index.js",
+  "repository": "https://github.com/bonham000/react-quiz-app",
   "scripts": {
     "lint:server": "eslint src/server",
     "lint:client": "eslint src/client",

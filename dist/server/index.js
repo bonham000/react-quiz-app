@@ -64,7 +64,7 @@ var _passport4 = _interopRequireDefault(_passport3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_dotenv2.default.config();
+_dotenv2.default.config({ silent: true });
 
 var url = process.env.MONGO_HOST;
 var secretString = process.env.SECRET_STRING;
