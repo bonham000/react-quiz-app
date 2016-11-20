@@ -6,7 +6,7 @@ const quiz = (state = [], action) => {
 	switch(action.type) {
 
 		case ADD_QUIZ:
-			return state;
+			return state.concat(action.quiz);
 
 		case SAVE_QUIZZES:
 			return [...action.data];
