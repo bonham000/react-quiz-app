@@ -13,6 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Schema = _mongoose2.default.Schema;
 
 var Leaderboard = new Schema({
+	id: String,
 	quiz: String,
 	leaders: Array
 });
