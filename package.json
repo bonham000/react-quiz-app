@@ -13,6 +13,7 @@
     "create:html": "cp src/client/index.html dist/client/",
     "predev": "npm-run-all create:*",
     "dev": "cross-env NODE_ENV=development nodemon --watch src/server --exec \"babel-node src/server/index.js\"",
+    "dev:client": "cross-env NODE_ENV=development webpack --config webpack.config.js",
     "prebuild": "npm-run-all lint clean create:*",
     "build:client": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "build:server": "babel src/server -d dist/server",
