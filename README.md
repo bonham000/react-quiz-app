@@ -1,3 +1,7 @@
+**~ Deprecated**
+
+This project is no longer maintained. You can view a more update to date version [here](https://github.com/bonham000/app-time-lessons).
+
 # A React Multiple Choice Quiz App
 
 See it deployed here: https://pacific-retreat-29989.herokuapp.com/.
