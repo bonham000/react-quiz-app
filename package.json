@@ -59,7 +59,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-2": "^6.13.0",
-    "bcrypt": "^0.8.7",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
